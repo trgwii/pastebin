@@ -1,5 +1,5 @@
-import { serve, v4 } from "./deps.ts";
-import { router } from "./router.ts";
+import { serve, ServerRequest, v4 } from "./deps.ts";
+import { router, next } from "./router.ts";
 import { apply, index } from "./vs.ts";
 
 // deno run --allow-net --allow-read=public,node_modules/monaco-editor/min,pastes --allow-write=pastes serve.ts
@@ -10,6 +10,14 @@ try {
 } catch (err) {}
 
 const app = router(serve({ port: 8081 }));
+
+const log = (req: ServerRequest, next: next) => {
+  console.log(req.method + " " + req.url);
+  return next();
+};
+
+app.get("/", log);
+app.put('/', log);
 
 app.put(
   "/",
@@ -24,11 +32,6 @@ app.put(
     });
   },
 );
-
-app.get("/", (req, next) => {
-  console.log(req.method + " " + req.url);
-  return next();
-});
 
 app.get(
   /^\/[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}(\.\w+)?$/,
