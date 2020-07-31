@@ -21,7 +21,7 @@ export const staticSingle = (
       ),
   );
 
-export const require = (path: string) => {
+export const grab = (path: string) => {
   const url = new URL(path, import.meta.url);
   return url.protocol === "file:" ? Deno.readFile(url) : (fetch(url)
     .then((res) => res.arrayBuffer())
@@ -30,7 +30,7 @@ export const require = (path: string) => {
 
 const m = "node_modules/monaco-editor/min/";
 
-export const index = await require("public/index.html");
+export const index = await grab("public/index.html");
 
 const mime = (x: string) =>
   x === "js"
@@ -51,7 +51,7 @@ export const apply = async (app: router) => {
           "Content-Type": mime(ext),
           "Cache-Control": "public, max-age=2592000",
         }),
-        body: await require(url.href),
+        body: await grab(url.href),
       },
     );
   });
@@ -59,7 +59,7 @@ export const apply = async (app: router) => {
     app,
     "/js/app.js",
     "application/javascript",
-    await require("public/app.js"),
+    await grab("public/app.js"),
   );
   staticSingle(app, /^\/$/, "text/html", index);
 };
