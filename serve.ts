@@ -6,7 +6,7 @@ import { apply, index } from "./vs.ts";
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts
 
 try {
-  await Deno.mkdir('pastes');
+  await Deno.mkdir("pastes");
 } catch (err) {}
 
 const app = router(serve({ port: 8081 }));
@@ -17,7 +17,7 @@ const log = (req: ServerRequest, next: next) => {
 };
 
 app.get("/", log);
-app.put('/', log);
+app.put("/", log);
 
 app.put(
   "/",
