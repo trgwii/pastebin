@@ -9,7 +9,7 @@ export const matchUrl = (path: string | RegExp, req: string) =>
 export type next = () => void;
 export type handler = (req: ServerRequest, next: next) => void;
 export type handlers = Record<string, [string | RegExp, handler][]>;
-export type catcher = (err: any, req: ServerRequest) => void;
+export type catcher = (err: unknown, req: ServerRequest) => void;
 export type methods =
   | "get"
   | "head"

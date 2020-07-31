@@ -7,7 +7,9 @@ import { apply, index } from "./vs.ts";
 
 try {
   await Deno.mkdir("pastes");
-} catch (err) {}
+} catch {
+  void 0;
+}
 
 const app = router(serve({ port: 8081 }));
 
