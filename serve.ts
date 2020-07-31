@@ -2,9 +2,12 @@ import { serve, v4 } from "./deps.ts";
 import { router } from "./router.ts";
 import { apply, index } from "./vs.ts";
 
-// npm i monaco-editor
 // deno run --allow-net --allow-read=public,node_modules/monaco-editor/min,pastes --allow-write=pastes serve.ts
 // deno install -f -n pastebin-server --allow-net --allow-read=public,node_modules/monaco-editor/min,pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts -n pastebin-server
+
+try {
+  await Deno.mkdir('pastes');
+} catch (err) {}
 
 const app = router(serve({ port: 8081 }));
 

@@ -44,15 +44,14 @@ const mime = (x: string) =>
 export const apply = async (app: router) => {
   app.get("/vs", async (req) => {
     const ext = ((x) => x[x.length - 1])(req.url.split("."));
+    const url = new URL(req.url.slice(1), new URL(m, import.meta.url));
     req.respond(
       {
         headers: new Headers({
           "Content-Type": mime(ext),
           "Cache-Control": "public, max-age=2592000",
         }),
-        body: await Deno.open(
-          new URL(req.url.slice(1), new URL(m, import.meta.url)),
-        ),
+        body: await Deno.open(url),
       },
     );
   });
