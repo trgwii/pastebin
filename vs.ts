@@ -1,0 +1,62 @@
+import type { router } from "./router.ts";
+export const staticSingle = (
+  app: router,
+  path: string | RegExp,
+  type: string,
+  data: string | Uint8Array | Deno.Reader | undefined,
+) =>
+  app.get(
+    path,
+    (req) =>
+      req.respond(
+        {
+          headers: new Headers(
+            {
+              "Content-Type": type,
+              "Cache-Control": "public, max-age=2592000",
+            },
+          ),
+          body: data,
+        },
+      ),
+  );
+
+export const require = (path: string) =>
+  Deno.readFile(new URL(path, import.meta.url));
+
+const m = "node_modules/monaco-editor/min/";
+
+export const index = await require("public/index.html");
+
+const mime = (x: string) =>
+  x === "js"
+    ? "application/javascript"
+    : x === "css"
+    ? "text/css"
+    : x === "ttf"
+    ? "font/ttf"
+    : "application/octet-stream";
+
+export const apply = async (app: router) => {
+  app.get("/vs", async (req) => {
+    const ext = ((x) => x[x.length - 1])(req.url.split("."));
+    req.respond(
+      {
+        headers: new Headers({
+          "Content-Type": mime(ext),
+          "Cache-Control": "public, max-age=2592000",
+        }),
+        body: await Deno.open(
+          new URL(req.url.slice(1), new URL(m, import.meta.url)),
+        ),
+      },
+    );
+  });
+  staticSingle(
+    app,
+    "/js/app.js",
+    "application/javascript",
+    await require("public/app.js"),
+  );
+  staticSingle(app, /^\/$/, "text/html", index);
+};
