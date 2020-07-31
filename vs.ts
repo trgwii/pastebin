@@ -51,7 +51,7 @@ export const apply = async (app: router) => {
           "Content-Type": mime(ext),
           "Cache-Control": "public, max-age=2592000",
         }),
-        body: await Deno.open(url),
+        body: await require(url.href),
       },
     );
   });
