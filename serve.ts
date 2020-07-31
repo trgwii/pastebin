@@ -3,7 +3,7 @@ import { router } from "./router.ts";
 import { apply, index } from "./vs.ts";
 
 // npm i monaco-editor
-// deno run --allow-net --allow-read=index.html,node_modules/monaco-editor/min,app.js,pastes --allow-write=pastes serve.ts
+// deno run --allow-net --allow-read=public,node_modules/monaco-editor/min,app.js,pastes --allow-write=pastes serve.ts
 
 const app = router(serve({ port: 8081 }));
 

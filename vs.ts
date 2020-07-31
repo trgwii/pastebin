@@ -21,8 +21,12 @@ export const staticSingle = (
       ),
   );
 
-export const require = (path: string) =>
-  Deno.readFile(new URL(path, import.meta.url));
+export const require = (path: string) => {
+  const url = new URL(path, import.meta.url);
+  return url.protocol === "file:" ? Deno.readFile(url) : (fetch(url)
+    .then((res) => res.arrayBuffer())
+    .then((data) => new Uint8Array(data)));
+};
 
 const m = "node_modules/monaco-editor/min/";
 
