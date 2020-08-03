@@ -4,7 +4,6 @@ Ctrl+S - Save / create a paste
 Ctrl+Shift+F - Fork an existing paste
 Ctrl+L - Set language / syntax highlighting
 
-
 API:
 
 Do a PUT-request to root (/) with the entire paste data as the request body.
