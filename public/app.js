@@ -49,26 +49,8 @@ require(["vs/editor/editor.main"], () => {
     monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S,
     async function () {
       const data = editor.getValue();
-      const ln = editor.getPosition().lineNumber + 1;
-      editor.executeEdits("meme", [
-        {
-          range: {
-            startLineNumber: ln,
-            endLineNumber: ln,
-          },
-          text: "// Creating link...\n",
-        },
-      ]);
       const [uuid, bytes] = await create(data);
-      editor.executeEdits("meme", [
-        {
-          range: {
-            startLineNumber: ln,
-            endLineNumber: ln + 1,
-          },
-          text: `// ${location.href + uuid} (${bytes} bytes)\n`,
-        },
-      ]);
+      location.href = location.href + uuid;
     },
   );
 });

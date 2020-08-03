@@ -11,7 +11,7 @@ try {
   void 0;
 }
 
-const app = router(serve({ port: 8081 }));
+const app = router(serve({ port: Number(Deno.args[0] ?? 8080) }));
 
 const log = (req: ServerRequest, next: next) => {
   console.log(req.method + " " + req.url);
