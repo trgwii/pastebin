@@ -59,14 +59,9 @@ require(["vs/editor/editor.main"], () => {
       isNew = true;
       return;
     }
-    if (e.code === "KeyN") {
-      e.preventDefault();
-      location.href = "/";
-      return;
-    }
   });
   editor.addAction({
-    id: "my-unique-id",
+    id: "set-language",
     label: "Set language",
     keybindings: [
       monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_L,
