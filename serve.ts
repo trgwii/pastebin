@@ -5,7 +5,7 @@ import { grab, load } from "./router/static_bundle.ts";
 export const index = await grab("public/index.html", import.meta.url);
 export const js = await grab("public/app.js", import.meta.url);
 
-// deno run --allow-net --allow-read=public,pastes,monaco-editor.bin --allow-write=pastes serve.ts
+// deno run --allow-net --allow-read=public,pastes --allow-write=pastes serve.ts
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts
 
 try {
@@ -85,7 +85,7 @@ app.get("/r", async (req) => {
   }
 });
 
-app.static("/vs", await load("monaco-editor.bin", import.meta.url));
+app.static("/vs", await load("public/monaco-editor.bin", import.meta.url));
 
 app.get("/:id", async (req) => {
   if (req.headers.get("Accept")?.includes("html")) {
