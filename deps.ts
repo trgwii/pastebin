@@ -1,4 +1,5 @@
 export {
+  Response,
   serve,
   Server,
   ServerRequest,

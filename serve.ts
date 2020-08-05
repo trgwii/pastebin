@@ -1,8 +1,11 @@
 import { serve, ServerRequest, v4 } from "./deps.ts";
-import { next, router } from "./router.ts";
-import { apply, index } from "./vs.ts";
+import { defaultStaticOpts, next, router } from "./router/router.ts";
+import { grab, load } from "./router/static_bundle.ts";
 
-// deno run --allow-net --allow-read=public,node_modules/monaco-editor/min,pastes --allow-write=pastes serve.ts
+export const index = await grab("public/index.html", import.meta.url);
+export const js = await grab("public/app.js", import.meta.url);
+
+// deno run --allow-net --allow-read=public,pastes,monaco-editor.bin --allow-write=pastes serve.ts
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts
 
 try {
@@ -36,47 +39,39 @@ const log = (req: ServerRequest, next: next) => {
 app.get("/", log);
 app.put("/", log);
 
-app.put(
-  "/",
-  async (req) => {
-    const uuid = v4.generate();
-    const file = await Deno.open(
-      `pastes/${uuid}`,
-      { create: true, write: true },
-    );
-    let total = 0;
-    for await (const chunk of Deno.iter(req.body)) {
-      let bytes = 0;
-      try {
-        checkSpace(spaceLimit, usedSpace + total + chunk.length);
-      } catch (err) {
-        file.close();
-        await Deno.remove(`pastes/${uuid}`);
-        return req.respond({ status: 400, body: "File too large" });
-      }
-      while (bytes < chunk.length) {
-        bytes += await file.write(chunk.subarray(bytes));
-      }
-      total += bytes;
+app.put("/", async (req) => {
+  const uuid = v4.generate();
+  const file = await Deno.open(
+    `pastes/${uuid}`,
+    { create: true, write: true },
+  );
+  let total = 0;
+  for await (const chunk of Deno.iter(req.body)) {
+    let bytes = 0;
+    try {
+      checkSpace(spaceLimit, usedSpace + total + chunk.length);
+    } catch (err) {
+      file.close();
+      await Deno.remove(`pastes/${uuid}`);
+      return req.respond({ status: 400, body: "File too large" });
     }
-    usedSpace += total;
-    file.close();
-    return req.respond({
-      body: uuid + " " + String(total),
-    });
-  },
-);
+    while (bytes < chunk.length) {
+      bytes += await file.write(chunk.subarray(bytes));
+    }
+    total += bytes;
+  }
+  usedSpace += total;
+  file.close();
+  return req.respond({
+    body: uuid + " " + String(total),
+  });
+});
 
 app.get(
-  /^\/[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}(\.\w+)?$/,
-  async (req) => {
-    if (req.headers.get("Accept")?.includes("html")) {
-      return req.respond({ body: index });
-    }
-    const file = await Deno.open(`pastes/${req.url.slice(1)}`);
-    return req.respond({ body: file });
-  },
+  "/js/app.js",
+  (req) => req.respond({ ...defaultStaticOpts(req.url), body: js }),
 );
+
 app.get("/r", async (req) => {
   while (true) {
     for await (const de of Deno.readDir("pastes")) {
@@ -90,4 +85,20 @@ app.get("/r", async (req) => {
   }
 });
 
-apply(app);
+app.static("/vs", await load("monaco-editor.bin", import.meta.url));
+
+app.get("/:id", async (req) => {
+  if (req.headers.get("Accept")?.includes("html")) {
+    return req.respond({ body: index });
+  }
+  try {
+    const file = await Deno.open(`pastes/${req.params.id}`);
+    return req.respond({ body: file });
+  } catch {
+    return req.respond({ status: 404 });
+  }
+});
+app.get(
+  "/",
+  (req) => req.respond({ body: index }),
+);

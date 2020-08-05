@@ -43,8 +43,9 @@ require(["vs/editor/editor.main"], () => {
       e.preventDefault();
       const data = editor.getValue();
       const [uuid, bytes] = await create(data);
-      const language = /** @type {any} */ (editor.getModel())
-        ?._languageIdentifier?.language;
+      const language =
+        /** @type {string} */ (/** @type {any} */ (editor.getModel())
+          ?._languageIdentifier?.language);
       location.href = "/" + uuid +
         (language && language !== "plaintext" ? ("." + language) : "");
       return;
