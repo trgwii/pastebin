@@ -1,5 +1,5 @@
 import { serve, ServerRequest, v4 } from "./deps.ts";
-import { router, next } from "./router.ts";
+import { next, router } from "./router.ts";
 import { apply, index } from "./vs.ts";
 
 // deno run --allow-net --allow-read=public,node_modules/monaco-editor/min,pastes --allow-write=pastes serve.ts
@@ -10,6 +10,21 @@ try {
 } catch {
   void 0;
 }
+
+const spaceLimit = Number(Deno.args[1] ?? 1073741824 /* 1GB */);
+let usedSpace = 0;
+
+for await (const ent of Deno.readDir("pastes")) {
+  usedSpace += (await Deno.stat(`pastes/${ent.name}`)).size;
+}
+
+const checkSpace = (limit: number, used: number) => {
+  if (used >= limit) {
+    throw new TypeError("Global space limit exceeded");
+  }
+};
+
+checkSpace(spaceLimit, usedSpace);
 
 const app = router(serve({ port: Number(Deno.args[0] ?? 8080) }));
 
@@ -29,8 +44,25 @@ app.put(
       `pastes/${uuid}`,
       { create: true, write: true },
     );
+    let total = 0;
+    for await (const chunk of Deno.iter(req.body)) {
+      let bytes = 0;
+      try {
+        checkSpace(spaceLimit, usedSpace + total + chunk.length);
+      } catch (err) {
+        file.close();
+        await Deno.remove(`pastes/${uuid}`);
+        return req.respond({ status: 400, body: "File too large" });
+      }
+      while (bytes < chunk.length) {
+        bytes += await file.write(chunk.subarray(bytes));
+      }
+      total += bytes;
+    }
+    usedSpace += total;
+    file.close();
     return req.respond({
-      body: uuid + " " + String(await Deno.copy(req.body, file)),
+      body: uuid + " " + String(total),
     });
   },
 );
