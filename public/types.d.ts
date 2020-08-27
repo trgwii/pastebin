@@ -2,8 +2,8 @@
 ///<reference lib="DOM" />
 import type {
   editor,
-  KeyMod,
   KeyCode,
+  KeyMod,
   Uri,
 } from "../node_modules/monaco-editor/esm/vs/editor/editor.api.d.ts";
 declare global {

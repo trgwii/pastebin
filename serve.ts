@@ -1,5 +1,5 @@
-import { serve, ServerRequest, v4 } from "./deps.ts";
-import { defaultStaticOpts, next, router } from "./router/router.ts";
+import { serve, v4 } from "./deps.ts";
+import { defaultStaticOpts, router } from "./router/router.ts";
 import { grab, load } from "./router/static_bundle.ts";
 
 export const index = await grab("public/index.html", import.meta.url);
@@ -30,14 +30,6 @@ const checkSpace = (limit: number, used: number) => {
 checkSpace(spaceLimit, usedSpace);
 
 const app = router(serve({ port: Number(Deno.args[0] ?? 8080) }));
-
-const log = (req: ServerRequest, next: next) => {
-  console.log(req.method + " " + req.url);
-  return next();
-};
-
-app.get("/", log);
-app.put("/", log);
 
 app.put("/", async (req) => {
   const uuid = v4.generate();
