@@ -1,10 +1,11 @@
 # Bundling Monaco for pastebin
 
 ```batch
+deno install -f --allow-read=. --allow-write=. -n bundler https://git.rory.no/trgwii/Bundler/raw/branch/master/bundler.ts
 rmdir /S /Q node_modules
 del package-lock.json
 npm i --production monaco-editor
-deno run --allow-read=node_modules/monaco-editor/min/vs --allow-write=public/monaco-editor.bin router/static_bundle.ts node_modules/monaco-editor/min/vs public/monaco-editor.bin
+bundler compress node_modules/monaco-editor/min/vs public/monaco-editor.bin
 rmdir /S /Q node_modules
 del package-lock.json
 ```

@@ -1,6 +1,6 @@
-import { serve, v4 } from "./deps.ts";
+import { load, serve, v4 } from "./deps.ts";
+import { grab } from "./grab.ts";
 import { defaultStaticOpts, router } from "./router/router.ts";
-import { grab, load } from "./router/static_bundle.ts";
 
 export const index = await grab("public/index.html", import.meta.url);
 export const js = await grab("public/app.js", import.meta.url);
@@ -77,7 +77,10 @@ app.get("/r", async (req) => {
   }
 });
 
-app.static("/vs", await load("public/monaco-editor.bin", import.meta.url));
+app.static(
+  "/vs",
+  await load(await Deno.open("public/monaco-editor.bin")),
+);
 
 app.get("/:id", async (req) => {
   if (req.headers.get("Accept")?.includes("html")) {
