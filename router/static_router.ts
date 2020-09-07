@@ -5,7 +5,7 @@ import type { router } from "./router.ts";
 export type staticOpts = ((path: string) => Response) | Response;
 
 export const staticRoute = (
-  path: string = "/",
+  path = "/",
   opts: staticOpts,
   app: (() => router) | router,
   bundle: bundle,
