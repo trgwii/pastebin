@@ -16,7 +16,8 @@ if (
 export const index = staticFiles["index.html"];
 export const js = staticFiles["app.js"];
 
-// deno run --allow-net --allow-read=public,pastes --allow-write=pastes serve.ts
+// deno run --allow-net --allow-read=pastes --allow-write=pastes serve.ts
+// deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes serve.ts
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts
 
 try {
@@ -40,7 +41,11 @@ const checkSpace = (limit: number, used: number) => {
 
 checkSpace(spaceLimit, usedSpace);
 
-const app = router(serve({ port: Number(Deno.args[0] ?? 8080) }));
+const port = Number(Deno.args[0] ?? 8080);
+
+const app = router(serve({ port }));
+
+console.log(`Listening on :${port}`);
 
 app.put("/", async (req) => {
   const uuid = v4.generate();
