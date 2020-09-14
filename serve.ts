@@ -1,9 +1,20 @@
-import { load, serve, v4 } from "./deps.ts";
-import { grab } from "./grab.ts";
+import { serve, v4 } from "./deps.ts";
+import editor from "./monaco-editor.bin.ts";
+import pub from "./public.bin.ts";
 import { defaultStaticOpts, router } from "./router/router.ts";
 
-export const index = await grab("public/index.html", import.meta.url);
-export const js = await grab("public/app.js", import.meta.url);
+const staticFiles = await pub;
+
+if (
+  staticFiles instanceof Uint8Array ||
+  !(staticFiles["index.html"] instanceof Uint8Array) ||
+  !(staticFiles["app.js"] instanceof Uint8Array)
+) {
+  throw new TypeError("public.bin.ts: wrong format");
+}
+
+export const index = staticFiles["index.html"];
+export const js = staticFiles["app.js"];
 
 // deno run --allow-net --allow-read=public,pastes --allow-write=pastes serve.ts
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts
@@ -77,10 +88,7 @@ app.get("/r", async (req) => {
   }
 });
 
-app.static(
-  "/vs",
-  await load(await Deno.open("public/monaco-editor.bin")),
-);
+app.static("/vs", await editor);
 
 app.get("/:id", async (req) => {
   if (req.headers.get("Accept")?.includes("html")) {
