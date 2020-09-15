@@ -2,6 +2,9 @@
 /** @param {string} data */
 const create = async (data) => {
   const res = await fetch("/", { method: "PUT", body: data });
+  if (res.status !== 200) {
+    throw new Error(await res.text());
+  }
   const [uuid, bytes] = (await res.text()).split(" ");
   return [uuid, bytes];
 };
@@ -41,13 +44,21 @@ require(["vs/editor/editor.main"], () => {
       }
       e.preventDefault();
       const data = editor.getValue();
-      const [uuid, bytes] = await create(data);
-      const language =
-        /** @type {string} */ (/** @type {any} */ (editor.getModel())
-          ?._languageIdentifier?.language);
-      location.href = "/" + uuid +
-        (language && language !== "plaintext" ? ("." + language) : "");
-      return;
+      try {
+        const [uuid, bytes] = await create(data);
+        const language =
+          /** @type {string} */ (/** @type {any} */ (editor.getModel())
+            ?._languageIdentifier?.language);
+        location.href = "/" + uuid +
+          (language && language !== "plaintext" ? ("." + language) : "");
+        return;
+      } catch (err) {
+        const msg = err.message.startsWith("File already exists: ")
+          ? "File already exists at " + location.href +
+            err.message.split(" ").pop()
+          : err.message;
+        editor.setValue(editor.getValue() + "\n// Error: " + msg);
+      }
     }
     if (e.code === "KeyF" && e.shiftKey) {
       if (isNew) {

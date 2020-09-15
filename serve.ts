@@ -77,7 +77,7 @@ app.put("/", async (req) => {
   if (stats) {
     await Deno.remove(path);
     usedSpace -= stats.size;
-    return req.respond({ status: 400, body: "File already exists" });
+    return req.respond({ status: 400, body: "File already exists: " + id });
   }
   Deno.rename(path, idPath);
   return req.respond({
