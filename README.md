@@ -1,15 +1,21 @@
-Keyboard shortcuts:
+# Pastebin server
 
+## Keyboard shortcuts
+
+```
 Ctrl+S - Save / create a paste
 Ctrl+Shift+F - Fork an existing paste
 Ctrl+L - Set language / syntax highlighting
+```
 
-API:
+## API
 
 Do a PUT-request to root (/) with the entire paste data as the request body.
 
 Server will respond with:
-<uuid> <bytes>
+
+`<uuid> <bytes>`
 
 Your paste will be available on:
-http://<server>/<uuid>
+
+`http://<server>/<uuid>`
