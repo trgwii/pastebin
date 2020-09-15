@@ -1,40 +1,43 @@
 // deno-lint-ignore-file
-/** @param {string} data */
-const create = async (data) => {
-  const res = await fetch("/", { method: "PUT", body: data });
-  if (res.status !== 200) {
-    throw new Error(await res.text());
-  }
-  const [uuid, bytes] = (await res.text()).split(" ");
-  return [uuid, bytes];
-};
+function create(data) {
+  return fetch("/", { method: "PUT", body: data }).then(function (res) {
+    return res.text().then(function (text) {
+      if (res.status !== 200) {
+        throw new Error(text);
+      }
+      var uuidBytes = text.split(" ");
+      var uuid = uuidBytes[0];
+      var bytes = uuidBytes[1];
+      return [uuid, bytes];
+    });
+  });
+}
 
-/** @param {string} uuid */
-const createLink = (uuid) => {
-  const link = location.href + uuid;
-  const a = document.createElement("a");
+function createLink(uuid) {
+  var link = location.href + uuid;
+  var a = document.createElement("a");
   a.href = link;
   a.textContent = link;
-  const p = document.createElement("p");
+  var p = document.createElement("p");
   p.appendChild(a);
   return p;
-};
+}
 
-const main = document.querySelector("#main");
-let isNew = location.pathname === "/";
+var main = document.querySelector("#main");
+var isNew = location.pathname === "/";
 
-require(["vs/editor/editor.main"], () => {
+require(["vs/editor/editor.main"], function () {
   if (!(main instanceof HTMLElement)) {
     return;
   }
-  const editor = monaco.editor.create(main, {
+  var editor = monaco.editor.create(main, {
     renderWhitespace: "all",
     theme: "vs-dark",
     wordWrap: "on",
     readOnly: !isNew,
   });
   window.editor = editor;
-  document.addEventListener("keydown", async (e) => {
+  document.addEventListener("keydown", function (e) {
     if (!(e.ctrlKey || e.metaKey)) {
       return;
     }
@@ -43,22 +46,22 @@ require(["vs/editor/editor.main"], () => {
         return;
       }
       e.preventDefault();
-      const data = editor.getValue();
-      try {
-        const [uuid, bytes] = await create(data);
-        const language =
-          /** @type {string} */ (/** @type {any} */ (editor.getModel())
-            ?._languageIdentifier?.language);
+      var data = editor.getValue();
+      create(data).then(function (uuidBytes) {
+        var uuid = uuidBytes[0];
+        var bytes = uuidBytes[1];
+        var language =
+          ((editor.getModel() || {})._languageIdentifier || {}).language;
         location.href = "/" + uuid +
           (language && language !== "plaintext" ? ("." + language) : "");
         return;
-      } catch (err) {
-        const msg = err.message.startsWith("File already exists: ")
+      }).catch(function (err) {
+        var msg = err.message.startsWith("File already exists: ")
           ? "File already exists at " + location.href +
             err.message.split(" ").pop()
           : err.message;
         editor.setValue(editor.getValue() + "\n// Error: " + msg);
-      }
+      });
     }
     if (e.code === "KeyF" && e.shiftKey) {
       if (isNew) {
@@ -77,9 +80,9 @@ require(["vs/editor/editor.main"], () => {
     keybindings: [
       monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_L,
     ],
-    run: (ed) => {
-      const lang = prompt("Set language");
-      const model = ed.getModel();
+    run: function (ed) {
+      var lang = prompt("Set language");
+      var model = ed.getModel();
       if (!model || !lang) {
         return;
       }
@@ -87,18 +90,20 @@ require(["vs/editor/editor.main"], () => {
     },
   });
   if (!isNew) {
-    const [file, lang] = location.pathname.split(".");
+    var fileLang = location.pathname.split(".");
+    var file = fileLang[0];
+    var lang = fileLang[1];
     if (lang) {
-      const model = editor.getModel();
+      var model = editor.getModel();
       if (model) {
         monaco.editor.setModelLanguage(model, lang);
       }
     }
-    (async () => {
-      editor.setValue("// Loading...");
-      const res = await fetch(file);
-      const text = await res.text();
+    editor.setValue("// Loading...");
+    fetch(file).then(function (res) {
+      return res.text();
+    }).then(function (text) {
       editor.setValue(text);
-    })();
+    });
   }
 });
