@@ -49,3 +49,4 @@ const pub = async () => {
 await monaco();
 await pub();
 await exec(["deno", "fmt"]);
+await exec(["deno", "lint", "--unstable"]);

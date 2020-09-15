@@ -1,5 +1,4 @@
-//eslint-disable-next-line triple-slash-reference
-///<reference path="types.d.ts" />
+// deno-lint-ignore-file
 /** @param {string} data */
 const create = async (data) => {
   const res = await fetch("/", { method: "PUT", body: data });
