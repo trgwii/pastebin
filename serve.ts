@@ -59,7 +59,7 @@ app.put("/", async (req) => {
       checkSpace(spaceLimit, usedSpace + total + chunk.length);
     } catch (err) {
       file.close();
-      await Deno.remove(`pastes/${uuid}`);
+      await Deno.remove(path);
       return req.respond({ status: 400, body: "File too large" });
     }
     while (bytes < chunk.length) {
@@ -72,7 +72,14 @@ app.put("/", async (req) => {
   usedSpace += total;
   file.close();
   const id = encode(hash.digest());
-  Deno.rename(path, `pastes/${id}`);
+  const idPath = `pastes/${id}`;
+  const stats = await Deno.stat(idPath).catch(() => null);
+  if (stats) {
+    await Deno.remove(path);
+    usedSpace -= stats.size;
+    return req.respond({ status: 400, body: "File already exists" });
+  }
+  Deno.rename(path, idPath);
   return req.respond({
     body: id + " " + String(total),
   });
