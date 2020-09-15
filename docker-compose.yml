@@ -5,6 +5,7 @@ services:
     image: hayd/alpine-deno # Until official deno image is available
     container_name: trgwii_deno_pastebin
     restart: unless-stopped
+    working_dir: /deno-dir/
     command: run --allow-net --allow-read=pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts
     ports:
       - "8080:8080"
