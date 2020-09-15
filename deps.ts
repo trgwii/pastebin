@@ -1,3 +1,5 @@
+export { encode } from "https://deno.land/std@0.69.0/encoding/base64url.ts";
+export { createHash } from "https://deno.land/std@0.69.0/hash/mod.ts";
 export {
   Response,
   serve,

@@ -1,4 +1,4 @@
-import { serve, v4 } from "./deps.ts";
+import { createHash, encode, serve, v4 } from "./deps.ts";
 import editor from "./monaco-editor.bin.ts";
 import pub from "./public.bin.ts";
 import { defaultStaticOpts, router } from "./router/router.ts";
@@ -49,11 +49,10 @@ console.log(`Listening on :${port}`);
 
 app.put("/", async (req) => {
   const uuid = v4.generate();
-  const file = await Deno.open(
-    `pastes/${uuid}`,
-    { create: true, write: true },
-  );
+  const path = `pastes/${uuid}`;
+  const file = await Deno.open(path, { create: true, write: true });
   let total = 0;
+  const hash = createHash("sha1");
   for await (const chunk of Deno.iter(req.body)) {
     let bytes = 0;
     try {
@@ -64,14 +63,18 @@ app.put("/", async (req) => {
       return req.respond({ status: 400, body: "File too large" });
     }
     while (bytes < chunk.length) {
-      bytes += await file.write(chunk.subarray(bytes));
+      const subchunk = chunk.subarray(bytes);
+      bytes += await file.write(subchunk);
+      hash.update(subchunk);
     }
     total += bytes;
   }
   usedSpace += total;
   file.close();
+  const id = encode(hash.digest());
+  Deno.rename(path, `pastes/${id}`);
   return req.respond({
-    body: uuid + " " + String(total),
+    body: id + " " + String(total),
   });
 });
 
