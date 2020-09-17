@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  pastebin:
+    image: trgwii/deno-pastebin
+    container_name: trgwii_deno_pastebin
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        TRGWII_DENO_PASTEBIN_SERVE: $TRGWII_DENO_PASTEBIN_SERVE
+    environment:
+      TRGWII_DENO_PASTEBIN_SERVE: $TRGWII_DENO_PASTEBIN_SERVE
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+       - ./pastes:/deno-dir/pastes
