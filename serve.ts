@@ -90,19 +90,6 @@ app.get(
   (req) => req.respond({ ...defaultStaticOpts(req.url), body: js }),
 );
 
-app.get("/r", async (req) => {
-  while (true) {
-    for await (const de of Deno.readDir("pastes")) {
-      if (Math.random() < 0.001) {
-        const uuid = de.name;
-        return req.respond(
-          { status: 302, headers: new Headers({ Location: "/" + uuid }) },
-        );
-      }
-    }
-  }
-});
-
 app.static("/vs", await editor);
 
 app.get("/:id", async (req) => {
@@ -116,7 +103,21 @@ app.get("/:id", async (req) => {
     return req.respond({ status: 404 });
   }
 });
+
 app.get(
   "/",
   (req) => req.respond({ body: index }),
 );
+
+app.get("/r", async (req) => {
+  while (true) {
+    for await (const de of Deno.readDir("pastes")) {
+      if (Math.random() < 0.001) {
+        const uuid = de.name;
+        return req.respond(
+          { status: 302, headers: new Headers({ Location: "/" + uuid }) },
+        );
+      }
+    }
+  }
+});
