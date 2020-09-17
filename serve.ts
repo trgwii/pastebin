@@ -110,7 +110,7 @@ app.get("/:id", async (req) => {
     return req.respond({ body: index });
   }
   try {
-    const file = await Deno.open(`pastes/${req.params.id}`);
+    const file = await Deno.open(`pastes/${req.params.id.split(".")[0]}`);
     return req.respond({ body: file });
   } catch {
     return req.respond({ status: 404 });
