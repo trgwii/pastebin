@@ -92,7 +92,11 @@ export const handle = async (
       .find((
         [path],
       ) => matchUrl(path, req.url));
-    const [path, handler] = pair!;
+    if (!pair) {
+      return defaultHandler(Object.assign(req, { params: {} }), () => {});
+    }
+    const [path, handler] = pair;
+
     try {
       await handler(
         Object.assign(
