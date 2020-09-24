@@ -1,5 +1,4 @@
-import { Response } from "../deps.ts";
-import type { bundle } from "../deps.ts";
+import type { bundle, Response } from "../deps.ts";
 import type { router } from "./router.ts";
 
 export type staticOpts = ((path: string) => Response) | Response;
