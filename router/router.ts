@@ -37,7 +37,11 @@ export type handler = (
   next: next,
 ) => void;
 export type handlers = Record<string, [string | RegExp, handler][]>;
-export type catcher = (err: unknown, req: ServerRequest) => void;
+export type catcher = (
+  err: unknown,
+  req: ServerRequest,
+  log?: (...args: unknown[]) => void,
+) => void;
 export type methods =
   | "get"
   | "head"
@@ -65,8 +69,8 @@ export type router =
 export const defaultHandler: handler = (req) =>
   req.respond({ status: 404, body: `Cannot ${req.method} ${req.url}` });
 
-export const defaultCatcher: catcher = (err, req) => {
-  console.error("Unhandled error:", err);
+export const defaultCatcher: catcher = (err, req, log = console.error) => {
+  log("Unhandled error:", err);
   return req.respond({ status: 500, body: "Unhandled error:\n" + String(err) });
 };
 

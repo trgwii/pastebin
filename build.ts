@@ -46,8 +46,11 @@ const pub = async () => {
   await rm("public.bin");
 };
 
-await monaco();
-await pub();
+if (Deno.args[0] && Deno.args[0].includes("all")) {
+  await monaco();
+  await pub();
+}
+
 await exec(["deno", "fmt"]);
 await exec(["deno", "lint", "--unstable"]);
 await exec(["deno", "test", "--coverage", "--unstable"]);
