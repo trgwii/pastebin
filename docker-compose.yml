@@ -2,11 +2,16 @@ version: "3.7"
 
 services:
   pastebin:
-    image: hayd/alpine-deno # Until official deno image is available
+    image: trgwii/deno-pastebin
     container_name: trgwii_deno_pastebin
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        TRGWII_DENO_PASTEBIN_SERVE: $TRGWII_DENO_PASTEBIN_SERVE
+    environment:
+      TRGWII_DENO_PASTEBIN_SERVE: $TRGWII_DENO_PASTEBIN_SERVE
     restart: unless-stopped
-    working_dir: /deno-dir/
-    command: run --allow-net --allow-read=pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts
     ports:
       - "8080:8080"
     volumes:

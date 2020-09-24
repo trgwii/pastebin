@@ -90,6 +90,25 @@ app.get(
   (req) => req.respond({ ...defaultStaticOpts(req.url), body: js }),
 );
 
+app.static("/vs", await editor);
+
+app.get("/:id", async (req) => {
+  if (req.headers.get("Accept")?.includes("html")) {
+    return req.respond({ body: index });
+  }
+  try {
+    const file = await Deno.open(`pastes/${req.params.id.split(".")[0]}`);
+    return req.respond({ body: file });
+  } catch {
+    return req.respond({ status: 404 });
+  }
+});
+
+app.get(
+  "/",
+  (req) => req.respond({ body: index }),
+);
+
 app.get("/r", async (req) => {
   while (true) {
     for await (const de of Deno.readDir("pastes")) {
@@ -102,21 +121,3 @@ app.get("/r", async (req) => {
     }
   }
 });
-
-app.static("/vs", await editor);
-
-app.get("/:id", async (req) => {
-  if (req.headers.get("Accept")?.includes("html")) {
-    return req.respond({ body: index });
-  }
-  try {
-    const file = await Deno.open(`pastes/${req.params.id}`);
-    return req.respond({ body: file });
-  } catch {
-    return req.respond({ status: 404 });
-  }
-});
-app.get(
-  "/",
-  (req) => req.respond({ body: index }),
-);
