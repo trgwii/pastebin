@@ -1,4 +1,4 @@
-// deno run -A build.ts
+// deno run -A build.ts all
 
 const noop = () => {};
 

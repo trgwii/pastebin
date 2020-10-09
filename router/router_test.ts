@@ -1,8 +1,8 @@
-import type { ServerRequest } from "https://deno.land/std@0.70.0/http/server.ts";
+import type { ServerRequest } from "https://deno.land/std@0.74.0/http/server.ts";
 import {
   assert,
   assertEquals,
-} from "https://deno.land/std@0.70.0/testing/asserts.ts";
+} from "https://deno.land/std@0.74.0/testing/asserts.ts";
 import {
   defaultCatcher,
   defaultHandler,

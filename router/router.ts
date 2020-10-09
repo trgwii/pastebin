@@ -1,9 +1,4 @@
-import type {
-  bundle,
-  Response,
-  Server,
-  ServerRequest,
-} from "../deps.ts";
+import type { bundle, Response, Server, ServerRequest } from "../deps.ts";
 import { mime } from "./mime.ts";
 import { staticOpts, staticRoute } from "./static_router.ts";
 
