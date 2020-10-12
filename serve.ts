@@ -1,17 +1,26 @@
+import assets from "./assets.bin.ts";
 import { createHash, encode, serve, v4 } from "./deps.ts";
 import { exec } from "./exec.ts";
 import editor from "./monaco-editor.bin.ts";
-import pub from "./public.bin.ts";
 import { defaultStaticOpts, router } from "./router/router.ts";
 
-const staticFiles = await pub;
+const assetFiles = await assets;
+
+if (
+  assetFiles instanceof Uint8Array ||
+  !(assetFiles["thumbnail_gen.js"] instanceof Uint8Array)
+) {
+  throw new TypeError("assets.bin.ts: wrong format");
+}
+
+const staticFiles = assetFiles["public"];
 
 if (
   staticFiles instanceof Uint8Array ||
   !(staticFiles["index.html"] instanceof Uint8Array) ||
   !(staticFiles["app.js"] instanceof Uint8Array)
 ) {
-  throw new TypeError("public.bin.ts: wrong format");
+  throw new TypeError("assets.bin.ts: wrong format");
 }
 
 export const index = staticFiles["index.html"];
@@ -50,9 +59,28 @@ const app = router(serve({ hostname, port }));
 
 console.log(`Listening on ${hostname}:${port}`);
 
+for await (const de of Deno.readDir("pastes")) {
+  if (!de.isFile) {
+    continue;
+  }
+  const stats = await Deno.stat(`pastes/meta/${de.name}.json`)
+    .catch(() => false as const);
+  if (!stats) {
+    await Deno.writeTextFile(
+      `pastes/meta/${de.name}.json`,
+      JSON.stringify({ language: "plaintext" }),
+    );
+  }
+}
+
 if (Deno.args[2] === "thumbnails") {
+  await Deno.mkdir("pastes/thumbs", { recursive: true });
+  await Deno.writeFile(
+    "pastes/thumbs/thumbnail_gen.js",
+    assetFiles["thumbnail_gen.js"],
+  );
   if (await exec(["node", "-v"]).then((x) => x.success)) {
-    exec(["node", "thumbnail_gen.js"]);
+    exec(["node", "pastes/thumbs/thumbnail_gen.js"]);
   } else {
     console.warn(
       "thumbnail support specified but node.js not installed, disabling thumbnails",
@@ -97,9 +125,9 @@ app.put("/", async (req) => {
     return req.respond({ status: 400, body: "File already exists: " + id });
   }
   await Deno.rename(path, idPath);
-  await Deno.writeFile(
+  await Deno.writeTextFile(
     `pastes/meta/${id}.json`,
-    new TextEncoder().encode(JSON.stringify({ language })),
+    JSON.stringify({ language }),
   );
   return req.respond({
     body: id + " " + String(total),
@@ -145,7 +173,8 @@ app.get("/:id", async (req) => {
   if (req.headers.get("Accept")?.includes("html")) {
     const data = {
       ...JSON.parse(
-        await Deno.readTextFile(`pastes/meta/${req.params.id}.json`),
+        await Deno.readTextFile(`pastes/meta/${req.params.id}.json`)
+          .catch(() => "{}"),
       ) as { language: string },
       image: req.params.id,
     };

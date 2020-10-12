@@ -1,3 +1,4 @@
+// deno-lint-ignore-file
 "use strict";
 
 const { execSync } = require("child_process");
@@ -7,10 +8,13 @@ const { promises: fs } = require("fs");
 
 (async () => {
   if (
-    await fs.stat(join(__dirname, "node_modules")).then(() => false, () => true)
+    await fs.stat(join(__dirname, "..", "..", "node_modules")).then(
+      () => false,
+      () => true,
+    )
   ) {
     execSync("npm i puppeteer", { stdio: "inherit" });
-    await fs.unlink(join(__dirname, "package-lock.json"));
+    await fs.unlink(join(__dirname, "..", "..", "package-lock.json"));
   }
 
   const puppeteer = require("puppeteer");
@@ -19,8 +23,8 @@ const { promises: fs } = require("fs");
 
   const page = await browser.newPage();
 
-  const pastes = join(__dirname, "pastes", "meta");
-  const thumbs = join(pastes, "..", "thumbs");
+  const pastes = join(__dirname, "..", "meta");
+  const thumbs = __dirname;
 
   await fs.mkdir(thumbs).catch(() => {});
 

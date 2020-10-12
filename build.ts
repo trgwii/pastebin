@@ -32,19 +32,18 @@ const monaco = async () => {
   await monacoCleanup();
 };
 
-const pub = async () => {
-  await rm("public.bin");
-  await exec(["bundler", "compress", "public", "public.bin"]);
-  await rm("public.bin.ts");
-  await exec(["bundler", "ts-bundle", "public.bin", "public.bin.ts"]);
-  await rm("public.bin");
+const assets = async () => {
+  await rm("assets.bin");
+  await exec(["bundler", "compress", "assets", "assets.bin"]);
+  await rm("assets.bin.ts");
+  await exec(["bundler", "ts-bundle", "assets.bin", "assets.bin.ts"]);
+  await rm("assets.bin");
 };
 
-if (import.meta.main && Deno.args[0] && Deno.args[0].includes("all")) {
+if (import.meta.main) {
   await monaco();
-  await pub();
-} else {
+  await assets();
   await exec(["deno", "fmt"]);
   await exec(["deno", "lint", "--unstable"]);
-  await exec(["deno", "test", "--coverage", "--unstable"]);
+  await exec(["deno", "test"]);
 }
