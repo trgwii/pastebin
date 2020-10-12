@@ -38,15 +38,15 @@ const { promises: fs } = require("fs");
         await fs.readFile(join(pastes, ent.name), "utf8"),
       );
       const name = ent.name.split(".")[0];
-      const thumbName = `${name}.png`;
+      const thumbName = `${name}`;
       const thumb = join(thumbs, thumbName);
       if (await fs.stat(thumb).catch(() => false)) {
         continue;
       }
-      console.log(`generating ${name}.png`);
+      console.log(`generating thumbnail: ${name}`);
       await page.goto("http://127.0.0.1:8080/" + name + "." + language);
 
-      await page.screenshot({ path: thumb, fullPage: true });
+      await page.screenshot({ type: "png", path: thumb });
     }
     await new Promise((resolve) => setTimeout(resolve, 30000));
   }

@@ -63,11 +63,11 @@ for await (const de of Deno.readDir("pastes")) {
   if (!de.isFile) {
     continue;
   }
-  const stats = await Deno.stat(`pastes/meta/${de.name}.json`)
+  const stats = await Deno.stat(`pastes/meta/${de.name}`)
     .catch(() => false as const);
   if (!stats) {
     await Deno.writeTextFile(
-      `pastes/meta/${de.name}.json`,
+      `pastes/meta/${de.name}`,
       JSON.stringify({ language: "plaintext" }),
     );
   }
@@ -125,10 +125,7 @@ app.put("/", async (req) => {
     return req.respond({ status: 400, body: "File already exists: " + id });
   }
   await Deno.rename(path, idPath);
-  await Deno.writeTextFile(
-    `pastes/meta/${id}.json`,
-    JSON.stringify({ language }),
-  );
+  await Deno.writeTextFile(`pastes/meta/${id}`, JSON.stringify({ language }));
   return req.respond({
     body: id + " " + String(total),
   });
@@ -157,7 +154,7 @@ app.get("/r", async (req) => {
 app.get("/t/:id", async (req) => {
   try {
     const path = `pastes/thumbs/${req.params.id.split(".")[0]}`;
-    const file = await Deno.open(path + ".png");
+    const file = await Deno.open(path);
     await req.respond({
       headers: new Headers({ "Content-Type": "image/png" }),
       body: file,
@@ -173,7 +170,7 @@ app.get("/:id", async (req) => {
   if (req.headers.get("Accept")?.includes("html")) {
     const data = {
       ...JSON.parse(
-        await Deno.readTextFile(`pastes/meta/${req.params.id}.json`)
+        await Deno.readTextFile(`pastes/meta/${req.params.id}`)
           .catch(() => "{}"),
       ) as { language: string },
       image: req.params.id,
