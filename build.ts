@@ -1,5 +1,7 @@
 // deno run -A build.ts all
 
+import { exec } from "./exec.ts";
+
 const noop = () => {};
 
 const rm = (path: string) => Deno.remove(path, { recursive: true }).catch(noop);
@@ -10,14 +12,6 @@ const monacoCleanup = () =>
     rm("package-lock.json"),
     rm("monaco-editor.bin"),
   ]);
-
-const exec = (cmd: string[]) =>
-  Deno.run({
-    cmd: [
-      ...Deno.build.os === "windows" ? ["cmd.exe", "/c"] : [],
-      ...cmd,
-    ],
-  }).status();
 
 const monaco = async () => {
   await monacoCleanup();
@@ -46,11 +40,11 @@ const pub = async () => {
   await rm("public.bin");
 };
 
-if (Deno.args[0] && Deno.args[0].includes("all")) {
+if (import.meta.main && Deno.args[0] && Deno.args[0].includes("all")) {
   await monaco();
   await pub();
+} else {
+  await exec(["deno", "fmt"]);
+  await exec(["deno", "lint", "--unstable"]);
+  await exec(["deno", "test", "--coverage", "--unstable"]);
 }
-
-await exec(["deno", "fmt"]);
-await exec(["deno", "lint", "--unstable"]);
-await exec(["deno", "test", "--coverage", "--unstable"]);

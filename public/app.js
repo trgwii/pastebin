@@ -1,6 +1,10 @@
 // deno-lint-ignore-file
-function create(data) {
-  return fetch("/", { method: "PUT", body: data }).then(function (res) {
+function create(data, language) {
+  return fetch("/", {
+    method: "PUT",
+    headers: { "X-Language": language },
+    body: data,
+  }).then(function (res) {
     return res.text().then(function (text) {
       if (res.status !== 200) {
         throw new Error(text);
@@ -47,11 +51,11 @@ require(["vs/editor/editor.main"], function () {
       }
       e.preventDefault();
       var data = editor.getValue();
-      create(data).then(function (uuidBytes) {
+      var language =
+        ((editor.getModel() || {})._languageIdentifier || {}).language;
+      create(data, language).then(function (uuidBytes) {
         var uuid = uuidBytes[0];
         var bytes = uuidBytes[1];
-        var language =
-          ((editor.getModel() || {})._languageIdentifier || {}).language;
         location.href = "/" + uuid +
           (language && language !== "plaintext" ? ("." + language) : "");
         return;
@@ -92,7 +96,10 @@ require(["vs/editor/editor.main"], function () {
   if (!isNew) {
     var fileLang = location.pathname.split(".");
     var file = fileLang[0];
-    var lang = fileLang[1];
+    var lang = fileLang[1] ||
+      document.querySelector('meta[http-equiv="X-Language"]').getAttribute(
+        "content",
+      );
     if (lang) {
       var model = editor.getModel();
       if (model) {

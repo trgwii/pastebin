@@ -1,4 +1,5 @@
 import { createHash, encode, serve, v4 } from "./deps.ts";
+import { exec } from "./exec.ts";
 import editor from "./monaco-editor.bin.ts";
 import pub from "./public.bin.ts";
 import { defaultStaticOpts, router } from "./router/router.ts";
@@ -17,16 +18,17 @@ export const index = staticFiles["index.html"];
 export const js = staticFiles["app.js"];
 
 // deno run --allow-net --allow-read=pastes --allow-write=pastes serve.ts
+// deno run --allow-net --allow-read=pastes --allow-write=pastes --allow-run serve.ts 8080 127.0.0.1 thumbnails
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes serve.ts
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts
 
 try {
-  await Deno.mkdir("pastes");
+  await Deno.mkdir("pastes/meta", { recursive: true });
 } catch {
   void 0;
 }
 
-const spaceLimit = Number(Deno.args[2] ?? 1073741824 /* 1GB */);
+const spaceLimit = Number(Deno.args[3] ?? 1073741824 /* 1GB */);
 let usedSpace = 0;
 
 for await (const ent of Deno.readDir("pastes")) {
@@ -48,12 +50,26 @@ const app = router(serve({ hostname, port }));
 
 console.log(`Listening on ${hostname}:${port}`);
 
+if (Deno.args[2] === "thumbnails") {
+  if (await exec(["node", "-v"]).then((x) => x.success)) {
+    exec(["node", "thumbnail_gen.js"]);
+  } else {
+    console.warn(
+      "thumbnail support specified but node.js not installed, disabling thumbnails",
+    );
+  }
+}
+
 app.put("/", async (req) => {
   const uuid = v4.generate();
+  const language = req.headers.get("X-Language");
   const path = `pastes/${uuid}`;
   const file = await Deno.open(path, { create: true, write: true });
   let total = 0;
   const hash = createHash("sha1");
+  if (language) {
+    hash.update(language + "\n");
+  }
   for await (const chunk of Deno.iter(req.body)) {
     let bytes = 0;
     try {
@@ -80,7 +96,11 @@ app.put("/", async (req) => {
     usedSpace -= stats.size;
     return req.respond({ status: 400, body: "File already exists: " + id });
   }
-  Deno.rename(path, idPath);
+  await Deno.rename(path, idPath);
+  await Deno.writeFile(
+    `pastes/meta/${id}.json`,
+    new TextEncoder().encode(JSON.stringify({ language })),
+  );
   return req.respond({
     body: id + " " + String(total),
   });
@@ -92,23 +112,6 @@ app.get(
 );
 
 app.static("/vs", await editor);
-
-app.get("/:id", async (req) => {
-  if (req.headers.get("Accept")?.includes("html")) {
-    return req.respond({ body: index });
-  }
-  try {
-    const file = await Deno.open(`pastes/${req.params.id.split(".")[0]}`);
-    return req.respond({ body: file });
-  } catch {
-    return req.respond({ status: 404 });
-  }
-});
-
-app.get(
-  "/",
-  (req) => req.respond({ body: index }),
-);
 
 app.get("/r", async (req) => {
   while (true) {
@@ -122,3 +125,58 @@ app.get("/r", async (req) => {
     }
   }
 });
+
+app.get("/t/:id", async (req) => {
+  try {
+    const path = `pastes/thumbs/${req.params.id.split(".")[0]}`;
+    const file = await Deno.open(path + ".png");
+    await req.respond({
+      headers: new Headers({ "Content-Type": "image/png" }),
+      body: file,
+    });
+    return file.close();
+  } catch (err) {
+    console.error(err.message);
+    return req.respond({ status: 404 });
+  }
+});
+
+app.get("/:id", async (req) => {
+  if (req.headers.get("Accept")?.includes("html")) {
+    const data = {
+      ...JSON.parse(
+        await Deno.readTextFile(`pastes/meta/${req.params.id}.json`),
+      ) as { language: string },
+      image: req.params.id,
+    };
+    return req.respond({
+      body: new TextDecoder().decode(index).replace(
+        /\{(\w+)\}/g,
+        (_, name: keyof typeof data) => data[name],
+      ),
+    });
+  }
+  try {
+    const file = await Deno.open(`pastes/${req.params.id.split(".")[0]}`);
+    await req.respond({ body: file });
+    return file.close();
+  } catch {
+    return req.respond({ status: 404 });
+  }
+});
+
+app.get(
+  "/",
+  (req) => {
+    const data = {
+      language: "plaintext",
+      image: "unknown",
+    };
+    return req.respond({
+      body: new TextDecoder().decode(index).replace(
+        /\{(\w+)\}/g,
+        (_, name: keyof typeof data) => data[name],
+      ),
+    });
+  },
+);
