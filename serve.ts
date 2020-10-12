@@ -26,7 +26,7 @@ try {
   void 0;
 }
 
-const spaceLimit = Number(Deno.args[1] ?? 1073741824 /* 1GB */);
+const spaceLimit = Number(Deno.args[2] ?? 1073741824 /* 1GB */);
 let usedSpace = 0;
 
 for await (const ent of Deno.readDir("pastes")) {
@@ -42,10 +42,11 @@ const checkSpace = (limit: number, used: number) => {
 checkSpace(spaceLimit, usedSpace);
 
 const port = Number(Deno.args[0] ?? 8080);
+const hostname = Deno.args[1] ?? "127.0.0.1";
 
-const app = router(serve({ port }));
+const app = router(serve({ hostname, port }));
 
-console.log(`Listening on :${port}`);
+console.log(`Listening on ${hostname}:${port}`);
 
 app.put("/", async (req) => {
   const uuid = v4.generate();
