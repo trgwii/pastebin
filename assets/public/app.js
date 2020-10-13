@@ -56,8 +56,7 @@ require(["vs/editor/editor.main"], function () {
       create(data, language).then(function (uuidBytes) {
         var uuid = uuidBytes[0];
         var bytes = uuidBytes[1];
-        location.href = "/" + uuid +
-          (language && language !== "plaintext" ? ("." + language) : "");
+        location.href = "/" + uuid;
         return;
       }).catch(function (err) {
         var msg = err.message.startsWith("File already exists: ")
