@@ -2,6 +2,7 @@ import assets from "./assets.bin.ts";
 import { createHash, encode, serve, v4 } from "./deps.ts";
 import { exec } from "./exec.ts";
 import editor from "./monaco-editor.bin.ts";
+import { mime } from "./router/mime.ts";
 import { defaultStaticOpts, router } from "./router/router.ts";
 
 const assetFiles = await assets;
@@ -167,12 +168,13 @@ app.get("/t/:id", async (req) => {
 });
 
 app.get("/:id", async (req) => {
+  const metadata = JSON.parse(
+    await Deno.readTextFile(`pastes/meta/${req.params.id}`)
+      .catch(() => "{}"),
+  ) as { language: string };
   if (req.headers.get("Accept")?.includes("html")) {
     const data = {
-      ...JSON.parse(
-        await Deno.readTextFile(`pastes/meta/${req.params.id}`)
-          .catch(() => "{}"),
-      ) as { language: string },
+      ...metadata,
       image: req.params.id,
     };
     return req.respond({
@@ -184,7 +186,12 @@ app.get("/:id", async (req) => {
   }
   try {
     const file = await Deno.open(`pastes/${req.params.id.split(".")[0]}`);
-    await req.respond({ body: file });
+    await req.respond({
+      headers: new Headers({
+        "Content-Type": mime(metadata.language),
+      }),
+      body: file,
+    });
     return file.close();
   } catch {
     return req.respond({ status: 404 });
