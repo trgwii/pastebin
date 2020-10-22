@@ -170,7 +170,7 @@ app.get("/t/:id", async (req) => {
 app.get("/:id", async (req) => {
   const metadata = JSON.parse(
     await Deno.readTextFile(`pastes/meta/${req.params.id}`)
-      .catch(() => "{}"),
+      .catch(() => JSON.stringify({ language: "plaintext" })),
   ) as { language: string };
   if (req.headers.get("Accept")?.includes("html")) {
     const data = {
