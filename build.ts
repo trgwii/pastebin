@@ -10,6 +10,7 @@ const monacoCleanup = () =>
   Promise.all([
     rm("node_modules"),
     rm("package-lock.json"),
+    rm("package.json"),
     rm("monaco-editor.bin"),
   ]);
 

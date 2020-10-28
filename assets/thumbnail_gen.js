@@ -15,6 +15,7 @@ const { promises: fs } = require("fs");
   ) {
     execSync("npm i puppeteer", { stdio: "inherit" });
     await fs.unlink(join(__dirname, "..", "..", "package-lock.json"));
+    await fs.unlink(join(__dirname, "..", "..", "package.json"));
   }
 
   const puppeteer = require("puppeteer");
