@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.74.0/testing/asserts.ts";
+import { assertEquals } from "../deps_test.ts";
 import { mime } from "./mime.ts";
 
 Deno.test("[mime] basic usage", () => {

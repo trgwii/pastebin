@@ -1,7 +1,7 @@
-import assets from "./assets.bin.ts";
+import assets from "./assets.b.ts";
 import { createHash, encode, serve, v4 } from "./deps.ts";
 import { exec } from "./exec.ts";
-import editor from "./monaco-editor.bin.ts";
+import editor from "./monaco-editor.b.ts";
 import { mime } from "./router/mime.ts";
 import { defaultStaticOpts, router } from "./router/router.ts";
 
@@ -117,7 +117,7 @@ app.put("/", async (req) => {
   }
   usedSpace += total;
   file.close();
-  const id = encode(hash.digest());
+  const id = encode(new Uint8Array(hash.digest()));
   const idPath = `pastes/${id}`;
   const stats = await Deno.stat(idPath).catch(() => null);
   if (stats) {

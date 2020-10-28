@@ -23,11 +23,12 @@ const monaco = async () => {
     "monaco-editor.bin",
   ]);
   await rm("monaco-editor.bin.ts");
+  await rm("monaco-editor.b.ts");
   await exec([
     "bundler",
     "ts-bundle",
     "monaco-editor.bin",
-    "monaco-editor.bin.ts",
+    "monaco-editor.b.ts",
   ]);
   await monacoCleanup();
 };
@@ -36,7 +37,8 @@ const assets = async () => {
   await rm("assets.bin");
   await exec(["bundler", "compress", "assets", "assets.bin"]);
   await rm("assets.bin.ts");
-  await exec(["bundler", "ts-bundle", "assets.bin", "assets.bin.ts"]);
+  await rm("assets.b.ts");
+  await exec(["bundler", "ts-bundle", "assets.bin", "assets.b.ts"]);
   await rm("assets.bin");
 };
 
