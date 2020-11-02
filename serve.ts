@@ -32,6 +32,27 @@ export const js = staticFiles["app.js"];
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes serve.ts
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts
 
+const perms = "permissions" in Deno;
+
+const missingPerms = (state: string, err: string, fatal = true) => {
+  if (state !== "granted") {
+    console.error(`Missing permissions for ${err}`);
+    return fatal ? Deno.exit(1) : true;
+  }
+  return false;
+};
+
+if (perms) {
+  const net = await (Deno as any).permissions.request({ name: "net" });
+  missingPerms(net.state, "creating a server");
+  const read = await (Deno as any).permissions
+    .request({ name: "read", path: "pastes" });
+  missingPerms(read.state, "reading stored pastes");
+  const write = await (Deno as any).permissions
+    .request({ name: "write", path: "pastes" });
+  missingPerms(write.state, "saving new pastes");
+}
+
 try {
   await Deno.mkdir("pastes/meta", { recursive: true });
 } catch {
@@ -75,17 +96,26 @@ for await (const de of Deno.readDir("pastes")) {
 }
 
 if (Deno.args[2] === "thumbnails") {
-  await Deno.mkdir("pastes/thumbs", { recursive: true });
-  await Deno.writeFile(
-    "pastes/thumbs/thumbnail_gen.js",
-    assetFiles["thumbnail_gen.js"],
-  );
-  if (await exec(["node", "-v"]).then((x) => x.success)) {
-    exec(["node", "pastes/thumbs/thumbnail_gen.js"]);
-  } else {
-    console.warn(
-      "thumbnail support specified but node.js not installed, disabling thumbnails",
+  const missing = perms
+    ? missingPerms(
+      (await (Deno as any).permissions.request({ name: "run" })).state,
+      "thumbnail generation, disabling thumbnails",
+      false,
+    )
+    : false;
+  if (!missing) {
+    await Deno.mkdir("pastes/thumbs", { recursive: true });
+    await Deno.writeFile(
+      "pastes/thumbs/thumbnail_gen.js",
+      assetFiles["thumbnail_gen.js"],
     );
+    if (await exec(["node", "-v"]).then((x) => x.success)) {
+      exec(["node", "pastes/thumbs/thumbnail_gen.js"]);
+    } else {
+      console.warn(
+        "thumbnail support specified but node.js not installed, disabling thumbnails",
+      );
+    }
   }
 }
 
