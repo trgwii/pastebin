@@ -32,6 +32,14 @@ export const js = staticFiles["app.js"];
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes serve.ts
 // deno install -f -n pastebin-server --allow-net --allow-read=pastes --allow-write=pastes https://git.rory.no/trgwii/pastebin/raw/branch/master/serve.ts
 
+type Permissions = {
+  permissions: {
+    request(
+      desc: { name: "net" | "run" } | { name: "read" | "write"; path: string },
+    ): Promise<{ state: "granted" | "denied" | "prompt" }>;
+  };
+};
+
 const perms = "permissions" in Deno;
 
 const missingPerms = (state: string, err: string, fatal = true) => {
@@ -43,12 +51,13 @@ const missingPerms = (state: string, err: string, fatal = true) => {
 };
 
 if (perms) {
-  const net = await (Deno as any).permissions.request({ name: "net" });
+  const net = await (Deno as unknown as Permissions).permissions
+    .request({ name: "net" });
   missingPerms(net.state, "creating a server");
-  const read = await (Deno as any).permissions
+  const read = await (Deno as unknown as Permissions).permissions
     .request({ name: "read", path: "pastes" });
   missingPerms(read.state, "reading stored pastes");
-  const write = await (Deno as any).permissions
+  const write = await (Deno as unknown as Permissions).permissions
     .request({ name: "write", path: "pastes" });
   missingPerms(write.state, "saving new pastes");
 }
@@ -98,7 +107,8 @@ for await (const de of Deno.readDir("pastes")) {
 if (Deno.args[2] === "thumbnails") {
   const missing = perms
     ? missingPerms(
-      (await (Deno as any).permissions.request({ name: "run" })).state,
+      (await (Deno as unknown as Permissions).permissions
+        .request({ name: "run" })).state,
       "thumbnail generation, disabling thumbnails",
       false,
     )
