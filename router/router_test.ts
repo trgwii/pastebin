@@ -27,7 +27,7 @@ Deno.test("[router defaultHandler] basic usage", () => {
     {
       method: "GET",
       url: "/",
-      respond: async (r: Response) => {
+      respond: (r: Response) => {
         assertEquals(r, { status: 404, body: "Cannot GET /" });
       },
     } as unknown as ServerRequest & { params: Record<string, string> },
@@ -37,7 +37,7 @@ Deno.test("[router defaultHandler] basic usage", () => {
 
 Deno.test("[router defaultCatcher] basic usage", () => {
   defaultCatcher("meme", {
-    respond: async (r: Response) => {
+    respond: (r: Response) => {
       assertEquals(r, {
         status: 500,
         body: "Unhandled error:\nmeme",
