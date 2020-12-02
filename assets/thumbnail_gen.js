@@ -6,6 +6,8 @@ const { execSync } = require("child_process");
 const { join } = require("path");
 const { promises: fs } = require("fs");
 
+const [port] = process.argv.slice(2);
+
 (async () => {
   if (
     await fs.stat(join(__dirname, "..", "..", "node_modules")).then(
@@ -45,7 +47,7 @@ const { promises: fs } = require("fs");
         continue;
       }
       console.log(`generating thumbnail: ${name}`);
-      await page.goto("http://127.0.0.1:8080/" + name + "." + language);
+      await page.goto(`http://127.0.0.1:${port}/${name}.${language}`);
 
       await page.screenshot({ type: "png", path: thumb });
     }

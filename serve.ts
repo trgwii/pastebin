@@ -81,7 +81,7 @@ if (Deno.args[2] === "thumbnails") {
     assetFiles["thumbnail_gen.js"],
   );
   if (await exec(["node", "-v"]).then((x) => x.success)) {
-    exec(["node", "pastes/thumbs/thumbnail_gen.js"]);
+    exec(["node", "pastes/thumbs/thumbnail_gen.js", String(port)]);
   } else {
     console.warn(
       "thumbnail support specified but node.js not installed, disabling thumbnails",
