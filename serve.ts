@@ -24,8 +24,8 @@ if (
   throw new TypeError("assets.bin.ts: wrong format");
 }
 
-export const index = staticFiles["index.html"];
-export const js = staticFiles["app.js"];
+const index = staticFiles["index.html"];
+const js = staticFiles["app.js"];
 
 // deno run --allow-net --allow-read=pastes --allow-write=pastes serve.ts
 // deno run --allow-net --allow-read=pastes --allow-write=pastes --allow-run serve.ts 8080 127.0.0.1 thumbnails

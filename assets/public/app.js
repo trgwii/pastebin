@@ -56,6 +56,7 @@ require(["vs/editor/editor.main"], function () {
       create(data, language).then(function (uuidBytes) {
         var uuid = uuidBytes[0];
         var bytes = uuidBytes[1];
+        localStorage.removeItem("paste");
         location.href = "/" + uuid;
         return;
       }).catch(function (err) {
@@ -65,6 +66,7 @@ require(["vs/editor/editor.main"], function () {
           : err.message;
         editor.setValue(editor.getValue() + "\n// Error: " + msg);
       });
+      return;
     }
     if (e.code === "KeyF" && e.shiftKey) {
       if (isNew) {
@@ -76,6 +78,7 @@ require(["vs/editor/editor.main"], function () {
       isNew = true;
       return;
     }
+    localStorage.setItem("paste", editor.getValue());
   });
   editor.addAction({
     id: "set-language",
@@ -111,5 +114,10 @@ require(["vs/editor/editor.main"], function () {
     }).then(function (text) {
       editor.setValue(text);
     });
+  } else {
+    const stored = localStorage.getItem("paste");
+    if (stored) {
+      editor.setValue(stored);
+    }
   }
 });
