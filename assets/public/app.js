@@ -93,6 +93,7 @@ require(["vs/editor/editor.main"], function () {
         return;
       }
       monaco.editor.setModelLanguage(model, lang);
+      localStorage.setItem("language", lang);
     },
   });
   if (!isNew) {
@@ -115,9 +116,16 @@ require(["vs/editor/editor.main"], function () {
       editor.setValue(text);
     });
   } else {
-    const stored = localStorage.getItem("paste");
+    var stored = localStorage.getItem("paste");
     if (stored) {
       editor.setValue(stored);
+    }
+    var lang = localStorage.getItem("language");
+    var model = editor.getModel();
+    if (lang) {
+      if (model) {
+        monaco.editor.setModelLanguage(model, lang);
+      }
     }
   }
 });
