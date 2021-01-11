@@ -1,0 +1,27 @@
+{
+  "headers": {
+    "via": "1.1 varnish (Varnish/6.0), 1.1 varnish",
+    "x-cache": "MISS, MISS",
+    "accept-ranges": "bytes",
+    "source-age": "0",
+    "expires": "Mon, 11 Jan 2021 08:25:26 GMT",
+    "strict-transport-security": "max-age=31536000",
+    "x-github-request-id": "A4A6:D14D:161F8A4:16FC588:5FFC0909",
+    "access-control-allow-origin": "*",
+    "etag": "W/\"e513c9525287343987b285b8572ff8c8f9ea15ce6be086d53dcf9ecd9cb7d29e\"",
+    "content-type": "text/plain; charset=utf-8",
+    "vary": "Authorization,Accept-Encoding, Accept-Encoding",
+    "cache-control": "max-age=300",
+    "x-xss-protection": "1; mode=block",
+    "x-cache-hits": "0, 0",
+    "x-frame-options": "deny",
+    "x-content-type-options": "nosniff",
+    "x-timer": "S1610353226.452008,VS0,VE200",
+    "x-fastly-request-id": "9a37ac896d534913a149a74369398f1f07562c18",
+    "x-served-by": "cache-osl6522-OSL",
+    "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+    "connection": "keep-alive",
+    "date": "Mon, 11 Jan 2021 08:20:26 GMT"
+  },
+  "url": "https://raw.githubusercontent.com/trgwii/bundler/master/getBytes.ts"
+}

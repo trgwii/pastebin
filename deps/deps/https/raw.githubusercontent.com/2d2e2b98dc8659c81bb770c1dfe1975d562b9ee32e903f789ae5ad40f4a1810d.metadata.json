@@ -1,0 +1,27 @@
+{
+  "headers": {
+    "access-control-allow-origin": "*",
+    "content-type": "text/plain; charset=utf-8",
+    "expires": "Mon, 11 Jan 2021 08:25:26 GMT",
+    "accept-ranges": "bytes",
+    "date": "Mon, 11 Jan 2021 08:20:26 GMT",
+    "etag": "W/\"2b996eb946118bb651b20b1930d15f793ec92b81ad308b1fcd28b6d6f1e3e317\"",
+    "x-content-type-options": "nosniff",
+    "via": "1.1 varnish (Varnish/6.0), 1.1 varnish",
+    "x-cache": "MISS, HIT",
+    "x-frame-options": "deny",
+    "x-cache-hits": "0, 1",
+    "cache-control": "max-age=300",
+    "connection": "keep-alive",
+    "x-github-request-id": "AD66:520D:A94E9D:B056FD:5FFC0909",
+    "x-timer": "S1610353226.354923,VS0,VE176",
+    "vary": "Authorization,Accept-Encoding, Accept-Encoding",
+    "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+    "source-age": "0",
+    "strict-transport-security": "max-age=31536000",
+    "x-fastly-request-id": "a92c94fbdedac01af9ce48ff8da4fbd8c3c3518e",
+    "x-xss-protection": "1; mode=block",
+    "x-served-by": "cache-osl6529-OSL"
+  },
+  "url": "https://raw.githubusercontent.com/trgwii/bundler/master/deps.ts"
+}
