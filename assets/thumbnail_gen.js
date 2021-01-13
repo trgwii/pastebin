@@ -17,8 +17,10 @@ const [port, timeout] = process.argv.slice(2);
   ) {
     execSync("npm init -y", { stdio: "inherit" });
     execSync("npm i puppeteer", { stdio: "inherit" });
-    await fs.unlink(join(__dirname, "..", "..", "package-lock.json"));
-    await fs.unlink(join(__dirname, "..", "..", "package.json"));
+    await fs.unlink(join(__dirname, "..", "..", "package-lock.json"))
+      .catch(() => {});
+    await fs.unlink(join(__dirname, "..", "..", "package.json"))
+      .catch(() => {});
   }
 
   const puppeteer = require("puppeteer");
