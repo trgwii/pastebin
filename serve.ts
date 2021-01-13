@@ -104,7 +104,8 @@ for await (const de of Deno.readDir("pastes")) {
   }
 }
 
-if (Deno.args[2] === "thumbnails") {
+const [thumbnails, interval] = (Deno.args[2] || "").split("=");
+if (thumbnails === "thumbnails") {
   const missing = perms
     ? missingPerms(
       (await (Deno as unknown as Permissions).permissions
@@ -120,7 +121,12 @@ if (Deno.args[2] === "thumbnails") {
       assetFiles["thumbnail_gen.js"],
     );
     if (await exec(["node", "-v"]).then((x) => x.success)) {
-      exec(["node", "pastes/thumbs/thumbnail_gen.js", String(port)]);
+      exec([
+        "node",
+        "pastes/thumbs/thumbnail_gen.js",
+        String(port),
+        interval || "1000",
+      ]);
     } else {
       console.warn(
         "thumbnail support specified but node.js not installed, disabling thumbnails",

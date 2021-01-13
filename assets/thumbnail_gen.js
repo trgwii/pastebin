@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const { join } = require("path");
 const { promises: fs } = require("fs");
 
-const [port] = process.argv.slice(2);
+const [port, timeout] = process.argv.slice(2);
 
 (async () => {
   if (
@@ -51,7 +51,7 @@ const [port] = process.argv.slice(2);
 
       await page.screenshot({ type: "png", path: thumb });
     }
-    await new Promise((resolve) => setTimeout(resolve, 30000));
+    await new Promise((resolve) => setTimeout(resolve, Number(timeout)));
   }
   await browser.close();
 })();
