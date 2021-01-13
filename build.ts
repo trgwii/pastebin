@@ -16,6 +16,7 @@ const monacoCleanup = () =>
 
 const monaco = async () => {
   await monacoCleanup();
+  await exec(["npm", "init", "-y"]);
   await exec(["npm", "install", "--production", "monaco-editor"]);
   await exec([
     "bundler",
@@ -46,7 +47,7 @@ const assets = async () => {
 if (import.meta.main) {
   await monaco();
   await assets();
-  await exec(["deno", "fmt"]);
-  await exec(["deno", "lint", "--unstable"]);
+  await exec(["deno", "fmt", "--ignore=deps"]);
+  await exec(["deno", "lint", "--unstable", "--ignore=deps"]);
   await exec(["deno", "test"]);
 }
