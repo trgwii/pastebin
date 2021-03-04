@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "access-control-max-age": "86400",
+    "x-response-time": "181ms",
+    "server": "Fly/88e12a3 (2021-03-02)",
+    "access-control-allow-origin": "*",
+    "content-type": "application/typescript; charset=utf-8",
+    "last-modified": "Tue, 02 Mar 2021 19:10:31 GMT",
+    "cache-control": "public, max-age=31536000, immutable",
+    "etag": "\"07a569d6055ea702d38fa33b102b8b80\"",
+    "date": "Thu, 04 Mar 2021 09:32:25 GMT",
+    "via": "2 fly.io"
+  },
+  "url": "https://deno.land/std@0.89.0/uuid/v5.ts"
+}

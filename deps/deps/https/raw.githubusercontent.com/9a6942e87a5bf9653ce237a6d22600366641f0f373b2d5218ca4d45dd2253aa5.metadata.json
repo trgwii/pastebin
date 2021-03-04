@@ -1,0 +1,26 @@
+{
+  "headers": {
+    "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+    "x-xss-protection": "1; mode=block",
+    "x-cache": "HIT",
+    "accept-ranges": "bytes",
+    "source-age": "251",
+    "via": "1.1 varnish",
+    "date": "Thu, 04 Mar 2021 09:31:41 GMT",
+    "x-frame-options": "deny",
+    "x-github-request-id": "5432:AAAC:19142C:1FDAA3:6040A075",
+    "x-fastly-request-id": "b0ab198905804a478b8a04efbb19bf42b72cb283",
+    "etag": "W/\"1a8ead5ef05a735b57ef91d23937bb86fd3bebbac516613957d105e0b14503da\"",
+    "strict-transport-security": "max-age=31536000",
+    "expires": "Thu, 04 Mar 2021 09:36:41 GMT",
+    "vary": "Authorization,Accept-Encoding",
+    "cache-control": "max-age=300",
+    "x-content-type-options": "nosniff",
+    "x-timer": "S1614850302.755799,VS0,VE0",
+    "x-cache-hits": "2",
+    "access-control-allow-origin": "*",
+    "x-served-by": "cache-osl6535-OSL",
+    "content-type": "text/plain; charset=utf-8"
+  },
+  "url": "https://raw.githubusercontent.com/trgwii/bundler/master/utils.ts"
+}

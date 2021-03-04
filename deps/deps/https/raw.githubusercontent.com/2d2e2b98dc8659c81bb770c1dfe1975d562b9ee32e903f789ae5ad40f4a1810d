@@ -1,6 +1,8 @@
 export { encode } from "https://deno.land/std@0.88.0/encoding/ascii85.ts";
 export {
+  readVarbig,
   readVarnum,
+  writeVarbig,
   writeVarnum,
 } from "https://deno.land/std@0.88.0/encoding/binary.ts";
 export { copyN } from "https://deno.land/std@0.88.0/io/ioutil.ts";

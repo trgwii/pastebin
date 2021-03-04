@@ -1,0 +1,26 @@
+{
+  "headers": {
+    "via": "1.1 varnish",
+    "etag": "W/\"145a362822a99ee90299550665d14be67f36667c6f2041b5aac002449c5e4233\"",
+    "strict-transport-security": "max-age=31536000",
+    "access-control-allow-origin": "*",
+    "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+    "content-type": "text/plain; charset=utf-8",
+    "source-age": "251",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "x-served-by": "cache-osl6535-OSL",
+    "x-cache-hits": "1",
+    "x-timer": "S1614850302.557031,VS0,VE0",
+    "cache-control": "max-age=300",
+    "x-github-request-id": "749A:6347:378524:3D4D2F:6040A074",
+    "x-fastly-request-id": "a2020fdb522d236ada4e9cb519f4040a6b84c6b2",
+    "expires": "Thu, 04 Mar 2021 09:36:41 GMT",
+    "x-cache": "HIT",
+    "accept-ranges": "bytes",
+    "date": "Thu, 04 Mar 2021 09:31:41 GMT",
+    "vary": "Authorization,Accept-Encoding",
+    "x-frame-options": "deny"
+  },
+  "url": "https://raw.githubusercontent.com/trgwii/bundler/master/receive.ts"
+}

@@ -1,0 +1,26 @@
+{
+  "headers": {
+    "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+    "via": "1.1 varnish",
+    "x-served-by": "cache-osl6535-OSL",
+    "x-timer": "S1614850302.755748,VS0,VE0",
+    "x-frame-options": "deny",
+    "x-content-type-options": "nosniff",
+    "source-age": "251",
+    "expires": "Thu, 04 Mar 2021 09:36:41 GMT",
+    "content-type": "text/plain; charset=utf-8",
+    "x-fastly-request-id": "a0069b1030328502362b69a5e676af71a5b36a64",
+    "vary": "Authorization,Accept-Encoding",
+    "x-xss-protection": "1; mode=block",
+    "etag": "W/\"82b05d1e44ee03b2f8dc96108cd4d963d56d72fe3d70078f3b121d10cf89f02f\"",
+    "strict-transport-security": "max-age=31536000",
+    "date": "Thu, 04 Mar 2021 09:31:41 GMT",
+    "x-cache": "HIT",
+    "access-control-allow-origin": "*",
+    "x-github-request-id": "10E8:291C:4B131C:5276D2:6040A2F9",
+    "cache-control": "max-age=300",
+    "accept-ranges": "bytes",
+    "x-cache-hits": "1"
+  },
+  "url": "https://raw.githubusercontent.com/trgwii/bundler/master/hostPort.ts"
+}

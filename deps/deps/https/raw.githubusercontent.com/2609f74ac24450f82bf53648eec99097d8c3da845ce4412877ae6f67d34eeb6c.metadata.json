@@ -1,0 +1,26 @@
+{
+  "headers": {
+    "via": "1.1 varnish",
+    "accept-ranges": "bytes",
+    "x-xss-protection": "1; mode=block",
+    "strict-transport-security": "max-age=31536000",
+    "etag": "W/\"ec2c97153a4454a5d71c3cfa7ef3d9e01227c1e6ad46d18d9a65cc18f185a3af\"",
+    "x-frame-options": "deny",
+    "vary": "Authorization,Accept-Encoding",
+    "content-type": "text/plain; charset=utf-8",
+    "source-age": "251",
+    "x-served-by": "cache-osl6535-OSL",
+    "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+    "x-timer": "S1614850302.556967,VS0,VE0",
+    "x-fastly-request-id": "4537e9f560a868edf0d6c3d15f016c6be3abde3e",
+    "date": "Thu, 04 Mar 2021 09:31:41 GMT",
+    "x-cache": "HIT",
+    "x-content-type-options": "nosniff",
+    "expires": "Thu, 04 Mar 2021 09:36:41 GMT",
+    "access-control-allow-origin": "*",
+    "x-cache-hits": "12",
+    "x-github-request-id": "17E8:EA80:B15BD3:B9FAFB:6040A074",
+    "cache-control": "max-age=300"
+  },
+  "url": "https://raw.githubusercontent.com/trgwii/bundler/master/compress.ts"
+}

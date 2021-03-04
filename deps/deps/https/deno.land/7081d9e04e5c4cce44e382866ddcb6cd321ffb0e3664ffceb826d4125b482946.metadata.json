@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "date": "Thu, 04 Mar 2021 09:32:25 GMT",
+    "etag": "\"56dedfab07516048be30694d32fb17e7\"",
+    "x-response-time": "131ms",
+    "via": "2 fly.io",
+    "server": "Fly/88e12a3 (2021-03-02)",
+    "cache-control": "public, max-age=31536000, immutable",
+    "access-control-allow-origin": "*",
+    "access-control-max-age": "86400",
+    "last-modified": "Tue, 02 Mar 2021 19:10:30 GMT",
+    "content-type": "application/typescript; charset=utf-8"
+  },
+  "url": "https://deno.land/std@0.89.0/hash/sha1.ts"
+}
