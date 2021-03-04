@@ -8,4 +8,102 @@ export default parse(
       { standard: "Z85" },
     ),
   ),
-);
+) as Promise<
+  {
+    base: {
+      browser: { ui: { codicons: { codicon: { "codicon.ttf": Uint8Array } } } };
+      worker: { "workerMain.js": Uint8Array };
+    };
+    "basic-languages": {
+      abap: { "abap.js": Uint8Array };
+      apex: { "apex.js": Uint8Array };
+      azcli: { "azcli.js": Uint8Array };
+      bat: { "bat.js": Uint8Array };
+      cameligo: { "cameligo.js": Uint8Array };
+      clojure: { "clojure.js": Uint8Array };
+      coffee: { "coffee.js": Uint8Array };
+      cpp: { "cpp.js": Uint8Array };
+      csharp: { "csharp.js": Uint8Array };
+      csp: { "csp.js": Uint8Array };
+      css: { "css.js": Uint8Array };
+      dart: { "dart.js": Uint8Array };
+      dockerfile: { "dockerfile.js": Uint8Array };
+      ecl: { "ecl.js": Uint8Array };
+      fsharp: { "fsharp.js": Uint8Array };
+      go: { "go.js": Uint8Array };
+      graphql: { "graphql.js": Uint8Array };
+      handlebars: { "handlebars.js": Uint8Array };
+      hcl: { "hcl.js": Uint8Array };
+      html: { "html.js": Uint8Array };
+      ini: { "ini.js": Uint8Array };
+      java: { "java.js": Uint8Array };
+      javascript: { "javascript.js": Uint8Array };
+      julia: { "julia.js": Uint8Array };
+      kotlin: { "kotlin.js": Uint8Array };
+      less: { "less.js": Uint8Array };
+      lexon: { "lexon.js": Uint8Array };
+      lua: { "lua.js": Uint8Array };
+      m3: { "m3.js": Uint8Array };
+      markdown: { "markdown.js": Uint8Array };
+      mips: { "mips.js": Uint8Array };
+      msdax: { "msdax.js": Uint8Array };
+      mysql: { "mysql.js": Uint8Array };
+      "objective-c": { "objective-c.js": Uint8Array };
+      pascal: { "pascal.js": Uint8Array };
+      pascaligo: { "pascaligo.js": Uint8Array };
+      perl: { "perl.js": Uint8Array };
+      pgsql: { "pgsql.js": Uint8Array };
+      php: { "php.js": Uint8Array };
+      postiats: { "postiats.js": Uint8Array };
+      powerquery: { "powerquery.js": Uint8Array };
+      powershell: { "powershell.js": Uint8Array };
+      pug: { "pug.js": Uint8Array };
+      python: { "python.js": Uint8Array };
+      r: { "r.js": Uint8Array };
+      razor: { "razor.js": Uint8Array };
+      redis: { "redis.js": Uint8Array };
+      redshift: { "redshift.js": Uint8Array };
+      restructuredtext: { "restructuredtext.js": Uint8Array };
+      ruby: { "ruby.js": Uint8Array };
+      rust: { "rust.js": Uint8Array };
+      sb: { "sb.js": Uint8Array };
+      scala: { "scala.js": Uint8Array };
+      scheme: { "scheme.js": Uint8Array };
+      scss: { "scss.js": Uint8Array };
+      shell: { "shell.js": Uint8Array };
+      solidity: { "solidity.js": Uint8Array };
+      sophia: { "sophia.js": Uint8Array };
+      sql: { "sql.js": Uint8Array };
+      st: { "st.js": Uint8Array };
+      swift: { "swift.js": Uint8Array };
+      systemverilog: { "systemverilog.js": Uint8Array };
+      tcl: { "tcl.js": Uint8Array };
+      twig: { "twig.js": Uint8Array };
+      typescript: { "typescript.js": Uint8Array };
+      vb: { "vb.js": Uint8Array };
+      xml: { "xml.js": Uint8Array };
+      yaml: { "yaml.js": Uint8Array };
+    };
+    editor: {
+      "editor.main.css": Uint8Array;
+      "editor.main.js": Uint8Array;
+      "editor.main.nls.de.js": Uint8Array;
+      "editor.main.nls.es.js": Uint8Array;
+      "editor.main.nls.fr.js": Uint8Array;
+      "editor.main.nls.it.js": Uint8Array;
+      "editor.main.nls.ja.js": Uint8Array;
+      "editor.main.nls.js": Uint8Array;
+      "editor.main.nls.ko.js": Uint8Array;
+      "editor.main.nls.ru.js": Uint8Array;
+      "editor.main.nls.zh-cn.js": Uint8Array;
+      "editor.main.nls.zh-tw.js": Uint8Array;
+    };
+    language: {
+      css: { "cssMode.js": Uint8Array; "cssWorker.js": Uint8Array };
+      html: { "htmlMode.js": Uint8Array; "htmlWorker.js": Uint8Array };
+      json: { "jsonMode.js": Uint8Array; "jsonWorker.js": Uint8Array };
+      typescript: { "tsMode.js": Uint8Array; "tsWorker.js": Uint8Array };
+    };
+    "loader.js": Uint8Array;
+  }
+>;

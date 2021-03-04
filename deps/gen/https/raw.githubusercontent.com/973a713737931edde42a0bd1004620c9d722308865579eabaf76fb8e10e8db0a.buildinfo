@@ -251,34 +251,34 @@
         "signature": "1",
         "affectsGlobalScope": true
       },
-      "https://deno.land/std@0.88.0/_util/assert.ts": {
-        "version": "222f5c7dcc830aed77f86791dd6a6af719f4c2d643b4566dfd79a99295b4e78b",
-        "signature": "0ef06ad2db6eef383beaf19f559f51975f0f43d48d15c64e0c74d3208eee52a1",
-        "affectsGlobalScope": false
-      },
-      "https://deno.land/std@0.88.0/encoding/ascii85.ts": {
-        "version": "acd49f250fbaa191d8ffc83cedf7045b35be1b1d25c3b412b3aa706bdc2cb6bb",
-        "signature": "dbb2362e99b329e3ed5fb30ed6e6c1140a1d2e7928d0da240b7e493923714a06",
-        "affectsGlobalScope": false
-      },
-      "https://deno.land/std@0.88.0/encoding/binary.ts": {
-        "version": "26630f0739bcb82038a0d91b425dd35d6f8645b2f3df60556a4a7d9d31bd7a11",
-        "signature": "2fdbd1c90d030a1499e6759fe259f27a2894e1ebc65173c7e3e8e17e2aad409f",
-        "affectsGlobalScope": false
-      },
-      "https://deno.land/std@0.88.0/bytes/mod.ts": {
+      "https://deno.land/std@0.89.0/bytes/mod.ts": {
         "version": "24e4947b74a83cbbf41ecd93a49f29c3f280fd920662a26fe309cce67a30cec3",
-        "signature": "6bd173316d1379636769b854e452da86a46608363b55a571f4ccd4ee2b2b3ffb",
+        "signature": "4247d12d8ab7443c7b7ed3b7df80978f0e4dfb552de63f170a02967c10a32c85",
         "affectsGlobalScope": false
       },
-      "https://deno.land/std@0.88.0/io/bufio.ts": {
+      "https://deno.land/std@0.89.0/_util/assert.ts": {
+        "version": "222f5c7dcc830aed77f86791dd6a6af719f4c2d643b4566dfd79a99295b4e78b",
+        "signature": "101e0536caf0c60ba43def82f35d6518f8b84cf05e531d19d970797a25131f56",
+        "affectsGlobalScope": false
+      },
+      "https://deno.land/std@0.89.0/io/bufio.ts": {
         "version": "01dcf5d1e4944bfad291b24719dd0d7d2a74aaf84d7b9719aeb1d61976bd6575",
-        "signature": "916415cd9bafc00ad49fa4a8bc4f129e8e2b614e6dc83f2997031442715bd390",
+        "signature": "cab12661c0ead8145bfc4130349cd75dc34ddc233e514842d7429e4eb699e08d",
         "affectsGlobalScope": false
       },
-      "https://deno.land/std@0.88.0/io/ioutil.ts": {
+      "https://deno.land/std@0.89.0/encoding/ascii85.ts": {
+        "version": "acd49f250fbaa191d8ffc83cedf7045b35be1b1d25c3b412b3aa706bdc2cb6bb",
+        "signature": "a1913d24a521f12176a847d8fa3fc538d011525a7f1fbafe4b67d0320effb850",
+        "affectsGlobalScope": false
+      },
+      "https://deno.land/std@0.89.0/encoding/binary.ts": {
+        "version": "26630f0739bcb82038a0d91b425dd35d6f8645b2f3df60556a4a7d9d31bd7a11",
+        "signature": "76cc035002d22741807552d960e531d54dffb76bc03f2e5f119e9a96cdb393e3",
+        "affectsGlobalScope": false
+      },
+      "https://deno.land/std@0.89.0/io/ioutil.ts": {
         "version": "f404f7fcd57c040d101af735a3aae3f36aad9de9df5f6348c679272741f03510",
-        "signature": "8579c743aeb8d904f251cf90a989c5e3d65cb7040b66e9748ccde2635491e00f",
+        "signature": "0faef6b253a195f36c64796a45591e8507898b2ed3a3eab166d1a2519131ec43",
         "affectsGlobalScope": false
       },
       "https://deno.land/x/lz4@v0.1.2/wasm.js": {
@@ -302,8 +302,8 @@
         "affectsGlobalScope": false
       },
       "https://raw.githubusercontent.com/trgwii/bundler/master/deps.ts": {
-        "version": "3449bc41f00a8425117619df8bc10dfdfd3afd2db99a0bfa48553d94b6093c44",
-        "signature": "16f2edfd70ea275a77679fae625776a1ff2381bf6248e1321f2dd52acf40b70f",
+        "version": "e8fc1bb01041014891b34c467c24e1e3230cd40e332dc46344dc659307b42bbf",
+        "signature": "f4378777c8a9deb0e885c0a6409baec7693407d520fd020a43164d4f99f9f3ac",
         "affectsGlobalScope": false
       },
       "https://raw.githubusercontent.com/trgwii/bundler/master/utils.ts": {
@@ -311,9 +311,24 @@
         "signature": "327fa3f09db9e46ae667ee676df1415ab6243a53c39764c5c1ca2e508da06756",
         "affectsGlobalScope": false
       },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/readerFromBuffer.ts": {
-        "version": "2ef6e6b4e79d729b73043aa955084dfb8fa34525dc486c5c221f2459bc84aca0",
-        "signature": "0d880fbc5dc1c406fa5e5018f809da88bea1435fea5866d5ca52e03593748a24",
+      "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts": {
+        "version": "075f277914f94dd260b153f3e23f25ae10d649dda1ed0fe656d4d8b6edde58d3",
+        "signature": "c8231fb94998fd8e699846b5459995148236ce58de18024ec8aeefc9a4090cfe",
+        "affectsGlobalScope": false
+      },
+      "https://deno.land/std@0.89.0/fmt/colors.ts": {
+        "version": "cba81587008a939b6a6b2827c85052fde92fecfae20d9e520b5f3747a4541ab3",
+        "signature": "0483dacc0a1180c5902c614f47d6ee9de4281f5a132e48981a6e3dae8293032d",
+        "affectsGlobalScope": false
+      },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/size.ts": {
+        "version": "c3c746c085dd328842debdd2689bd2fbd18f78aec0accf002b0f22f03bd43965",
+        "signature": "7ca48ffcc13da72cba6198a5c69b6c7268cd7909528835402d140edc2392a1cd",
+        "affectsGlobalScope": false
+      },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/compress.ts": {
+        "version": "5403cda2255a89641f6bfd51fa8ff75f9cb64eea56e3042dab950233fb2d9571",
+        "signature": "df00f469afaee2eacd75e91ec2998143966f1ce8726adf0b414b600c2a6e5981",
         "affectsGlobalScope": false
       },
       "https://raw.githubusercontent.com/trgwii/bundler/master/getBytes.ts": {
@@ -321,39 +336,19 @@
         "signature": "b2c058dc8d5176716b6d9f8eddffa1c82aad4329f845df8034f9aeb08ece39a5",
         "affectsGlobalScope": false
       },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts": {
-        "version": "075f277914f94dd260b153f3e23f25ae10d649dda1ed0fe656d4d8b6edde58d3",
-        "signature": "c8231fb94998fd8e699846b5459995148236ce58de18024ec8aeefc9a4090cfe",
-        "affectsGlobalScope": false
-      },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/compress.ts": {
-        "version": "30b92fbd3b67b2a75abf51b925a2689019ab1514fd12eceb4bb6273ec8120aab",
-        "signature": "df00f469afaee2eacd75e91ec2998143966f1ce8726adf0b414b600c2a6e5981",
-        "affectsGlobalScope": false
-      },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/hostPort.ts": {
-        "version": "b4c057e94f5a698ef0636db4f50d5468926222d96fdda643eba02f03618c977b",
-        "signature": "edff8aaa7127b30c33d3d2307efd5ce49396888853ec9364991d6631d8402bdf",
-        "affectsGlobalScope": false
-      },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/send.ts": {
-        "version": "6b4c0b14a8c0a97f1610d955e4da200bf459f428a5f232aaaacce82c6cf7101b",
-        "signature": "c7e8327d76bd4ce9c1da353f5532fbefac1e9ab2dd08a74e6403e5b4ffaf42b8",
-        "affectsGlobalScope": false
-      },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/load.ts": {
-        "version": "63b8627e09ab3943e5c322a686e20f7f80dafa6f82e9614b5e3cfaaf76406662",
-        "signature": "01cfdd1ca60e7b583f4dbdcfd200f86db7c6e0e15b1d0dc2f4688bd5ed3230b6",
-        "affectsGlobalScope": false
-      },
       "https://raw.githubusercontent.com/trgwii/bundler/master/extract.ts": {
-        "version": "e6c03b82b0ee6fe31d3524a7db894f91ebf948140579cbb1f7bc46b5fe10f0dd",
+        "version": "de26a3531c15436955cc9327f11053c2f3b8666b0bbd1a1f9da0e470a82368e0",
         "signature": "08fa22a85a1646ba877da5bab58bf9fb9c1b4f5465107a824c58e956e202e6e4",
         "affectsGlobalScope": false
       },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/receive.ts": {
-        "version": "59d5f14686fb27e789be6fdfc25ede94d5f1a8bee8f49cb09da6e4d57875f991",
-        "signature": "df3ac3818fe98a9578376261ecd6a47a95910cb21bcf920ba13954f00c25c9ea",
+      "https://raw.githubusercontent.com/trgwii/bundler/master/load.ts": {
+        "version": "4959357d30ba9c1721da4d930489b371e37876fd15ad256165076dffc988ad1d",
+        "signature": "01cfdd1ca60e7b583f4dbdcfd200f86db7c6e0e15b1d0dc2f4688bd5ed3230b6",
+        "affectsGlobalScope": false
+      },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/readerFromBuffer.ts": {
+        "version": "2ef6e6b4e79d729b73043aa955084dfb8fa34525dc486c5c221f2459bc84aca0",
+        "signature": "0d880fbc5dc1c406fa5e5018f809da88bea1435fea5866d5ca52e03593748a24",
         "affectsGlobalScope": false
       },
       "https://raw.githubusercontent.com/trgwii/bundler/master/parse.ts": {
@@ -361,9 +356,29 @@
         "signature": "3f34b14168415a68a9ad6db895619b18ab5f552416cd03d6db8123a18602c69a",
         "affectsGlobalScope": false
       },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/hostPort.ts": {
+        "version": "b4c057e94f5a698ef0636db4f50d5468926222d96fdda643eba02f03618c977b",
+        "signature": "edff8aaa7127b30c33d3d2307efd5ce49396888853ec9364991d6631d8402bdf",
+        "affectsGlobalScope": false
+      },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/receive.ts": {
+        "version": "59d5f14686fb27e789be6fdfc25ede94d5f1a8bee8f49cb09da6e4d57875f991",
+        "signature": "df3ac3818fe98a9578376261ecd6a47a95910cb21bcf920ba13954f00c25c9ea",
+        "affectsGlobalScope": false
+      },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/send.ts": {
+        "version": "6b4c0b14a8c0a97f1610d955e4da200bf459f428a5f232aaaacce82c6cf7101b",
+        "signature": "c7e8327d76bd4ce9c1da353f5532fbefac1e9ab2dd08a74e6403e5b4ffaf42b8",
+        "affectsGlobalScope": false
+      },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/ast.ts": {
+        "version": "9b9bedcb4e8ecbc958654ed15832f8e219b5a825b1eb0795b40df9475bd79a7e",
+        "signature": "46746a11416a01f3ce2ab55a6fedeac087f0b00c3da2e3de6f00f6882bb74e5a",
+        "affectsGlobalScope": false
+      },
       "https://raw.githubusercontent.com/trgwii/bundler/master/tsBundle.ts": {
-        "version": "ade8709de1a5bd0076e57ac6bd719928caeed0cf2d53cbb0dc5ca27830d9ada1",
-        "signature": "51da06bdb1f87a10a6a689ef07540a6c5e77fb6eb2c134fc616b4f232d5188b8",
+        "version": "bab5a4c25c7cbd8e2082624d20e7b5804e31fdccfc1007226652d69dd4127836",
+        "signature": "220196888c57d653ac50e5a9c74b0bdc2d66c78daa83fb994e3c7481444e984d",
         "affectsGlobalScope": false
       },
       "https://raw.githubusercontent.com/trgwii/bundler/master/unparse.ts": {
@@ -371,8 +386,13 @@
         "signature": "01795ba883e9b3eced5637fcdcbe03162ffd10c6cdede61b4ce23d7aed1b355f",
         "affectsGlobalScope": false
       },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/passthrough.ts": {
+        "version": "de0f6f00ac874df689654a34327ab9829db61af7668284e25a3d13c6ca055865",
+        "signature": "348d6763658d2824b48a406c79149bb54eb8841fd1145a7ad20bd9750f38948e",
+        "affectsGlobalScope": false
+      },
       "https://raw.githubusercontent.com/trgwii/bundler/master/bundler.ts": {
-        "version": "f47d6b2857d1767fc4c54074f56ebb896d52116dd2a5854e838fdb8c546288e1",
+        "version": "202ed088072e8480ca99f3011dffed4ddc064dba9f9a9e2d0eeadf85a4cc0699",
         "signature": "bc30a3b65a561e5fa611b79b8ee00d51f6540bf6f8ae86726df71613a7ea72cb",
         "affectsGlobalScope": false
       }
@@ -398,13 +418,13 @@
       "allowNonTsExtensions": true
     },
     "referencedMap": {
-      "https://deno.land/std@0.88.0/io/bufio.ts": [
-        "https://deno.land/std@0.88.0/_util/assert.ts",
-        "https://deno.land/std@0.88.0/bytes/mod.ts"
+      "https://deno.land/std@0.89.0/io/bufio.ts": [
+        "https://deno.land/std@0.89.0/_util/assert.ts",
+        "https://deno.land/std@0.89.0/bytes/mod.ts"
       ],
-      "https://deno.land/std@0.88.0/io/ioutil.ts": [
-        "https://deno.land/std@0.88.0/_util/assert.ts",
-        "https://deno.land/std@0.88.0/io/bufio.ts"
+      "https://deno.land/std@0.89.0/io/ioutil.ts": [
+        "https://deno.land/std@0.89.0/_util/assert.ts",
+        "https://deno.land/std@0.89.0/io/bufio.ts"
       ],
       "https://deno.land/x/brotli@v0.1.4/mod.ts": [
         "https://deno.land/x/brotli@v0.1.4/wasm.js"
@@ -416,34 +436,40 @@
         "https://deno.land/x/lz4@v0.1.2/wasm.js"
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/bundler.ts": [
+        "https://raw.githubusercontent.com/trgwii/bundler/master/ast.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/compress.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/extract.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/load.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/parse.ts",
+        "https://raw.githubusercontent.com/trgwii/bundler/master/passthrough.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/receive.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/send.ts",
+        "https://raw.githubusercontent.com/trgwii/bundler/master/size.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/tsBundle.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/unparse.ts"
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/compress.ts": [
+        "https://raw.githubusercontent.com/trgwii/bundler/master/size.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/utils.ts"
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/deps.ts": [
-        "https://deno.land/std@0.88.0/encoding/ascii85.ts",
-        "https://deno.land/std@0.88.0/encoding/binary.ts",
-        "https://deno.land/std@0.88.0/io/ioutil.ts",
+        "https://deno.land/std@0.89.0/encoding/ascii85.ts",
+        "https://deno.land/std@0.89.0/encoding/binary.ts",
+        "https://deno.land/std@0.89.0/io/ioutil.ts",
         "https://deno.land/x/brotli@v0.1.4/mod.ts"
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/extract.ts": [
         "https://raw.githubusercontent.com/trgwii/bundler/master/deps.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/getBytes.ts",
+        "https://raw.githubusercontent.com/trgwii/bundler/master/size.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/utils.ts"
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/load.ts": [
         "https://raw.githubusercontent.com/trgwii/bundler/master/getBytes.ts",
+        "https://raw.githubusercontent.com/trgwii/bundler/master/size.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/utils.ts"
       ],
@@ -462,7 +488,11 @@
         "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/utils.ts"
       ],
+      "https://raw.githubusercontent.com/trgwii/bundler/master/size.ts": [
+        "https://deno.land/std@0.89.0/fmt/colors.ts"
+      ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/tsBundle.ts": [
+        "https://raw.githubusercontent.com/trgwii/bundler/master/ast.ts",
         "https://raw.githubusercontent.com/trgwii/bundler/master/deps.ts"
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/unparse.ts": [
@@ -474,8 +504,8 @@
       ]
     },
     "exportedModulesMap": {
-      "https://deno.land/std@0.88.0/io/ioutil.ts": [
-        "https://deno.land/std@0.88.0/io/bufio.ts"
+      "https://deno.land/std@0.89.0/io/ioutil.ts": [
+        "https://deno.land/std@0.89.0/io/bufio.ts"
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/bundler.ts": [
         "https://raw.githubusercontent.com/trgwii/bundler/master/compress.ts",
@@ -488,9 +518,9 @@
         "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts"
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/deps.ts": [
-        "https://deno.land/std@0.88.0/encoding/ascii85.ts",
-        "https://deno.land/std@0.88.0/encoding/binary.ts",
-        "https://deno.land/std@0.88.0/io/ioutil.ts",
+        "https://deno.land/std@0.89.0/encoding/ascii85.ts",
+        "https://deno.land/std@0.89.0/encoding/binary.ts",
+        "https://deno.land/std@0.89.0/io/ioutil.ts",
         "https://deno.land/x/brotli@v0.1.4/mod.ts"
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/extract.ts": [
@@ -507,6 +537,9 @@
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/send.ts": [
         "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts"
+      ],
+      "https://raw.githubusercontent.com/trgwii/bundler/master/tsBundle.ts": [
+        "https://raw.githubusercontent.com/trgwii/bundler/master/ast.ts"
       ],
       "https://raw.githubusercontent.com/trgwii/bundler/master/unparse.ts": [
         "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts"

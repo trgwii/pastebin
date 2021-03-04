@@ -1,15 +1,15 @@
 {
   "headers": {
-    "access-control-max-age": "86400",
-    "server": "Fly/88e12a3 (2021-03-02)",
-    "via": "2 fly.io",
-    "last-modified": "Tue, 02 Mar 2021 19:10:29 GMT",
-    "cache-control": "public, max-age=31536000, immutable",
     "content-type": "application/typescript; charset=utf-8",
-    "date": "Thu, 04 Mar 2021 09:32:33 GMT",
     "etag": "\"652b56d087b5c7ca9242e3500611da85\"",
-    "x-response-time": "109ms",
-    "access-control-allow-origin": "*"
+    "cache-control": "public, max-age=31536000, immutable",
+    "via": "2 fly.io",
+    "server": "Fly/99a1c29 (2021-03-04)",
+    "access-control-allow-origin": "*",
+    "x-response-time": "110ms",
+    "date": "Thu, 04 Mar 2021 14:11:00 GMT",
+    "last-modified": "Tue, 02 Mar 2021 19:10:29 GMT",
+    "access-control-max-age": "86400"
   },
   "url": "https://deno.land/std@0.89.0/async/deferred.ts"
 }

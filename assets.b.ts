@@ -8,4 +8,9 @@ export default parse(
       { standard: "Z85" },
     ),
   ),
-);
+) as Promise<
+  {
+    public: { "app.js": Uint8Array; "index.html": Uint8Array };
+    "thumbnail_gen.js": Uint8Array;
+  }
+>;

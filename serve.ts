@@ -6,24 +6,7 @@ import { mime } from "./router/mime.ts";
 import { defaultStaticOpts, router } from "./router/router.ts";
 
 const assetFiles = await assets;
-
-if (
-  assetFiles instanceof Uint8Array ||
-  !(assetFiles["thumbnail_gen.js"] instanceof Uint8Array)
-) {
-  throw new TypeError("assets.bin.ts: wrong format");
-}
-
-const staticFiles = assetFiles["public"];
-
-if (
-  staticFiles instanceof Uint8Array ||
-  !(staticFiles["index.html"] instanceof Uint8Array) ||
-  !(staticFiles["app.js"] instanceof Uint8Array)
-) {
-  throw new TypeError("assets.bin.ts: wrong format");
-}
-
+const staticFiles = assetFiles.public;
 const index = staticFiles["index.html"];
 const js = staticFiles["app.js"];
 
