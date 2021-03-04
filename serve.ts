@@ -1,5 +1,6 @@
 import assets from "./assets.b.ts";
-import { createHash, encode, serve, v4 } from "./deps.ts";
+import { config } from "./config.ts";
+import { createHash, encode, serve, serveTLS, v4 } from "./deps.ts";
 import { exec } from "./exec.ts";
 import editor from "./monaco-editor.b.ts";
 import { mime } from "./router/mime.ts";
@@ -51,7 +52,8 @@ try {
   void 0;
 }
 
-const spaceLimit = Number(Deno.args[3] ?? 1073741824 /* 1GB */);
+const { maxSize, port, hostname, nodeThumbnails, nodeThumbnailInterval } =
+  config;
 let usedSpace = 0;
 
 for await (const ent of Deno.readDir("pastes")) {
@@ -64,12 +66,30 @@ const checkSpace = (limit: number, used: number) => {
   }
 };
 
-checkSpace(spaceLimit, usedSpace);
+checkSpace(maxSize, usedSpace);
 
-const port = Number(Deno.args[0] ?? 8080);
-const hostname = Deno.args[1] ?? "127.0.0.1";
+const app = router(
+  ((config.certFile && config.keyFile) ? serveTLS : serve)({
+    hostname,
+    port,
+    certFile: config.certFile,
+    keyFile: config.keyFile,
+  }),
+);
 
-const app = router(serve({ hostname, port }));
+if (config.httpsRedirect) {
+  const server = serve({ hostname, port: config.httpsRedirect });
+  (async () => {
+    for await (const req of server) {
+      req.respond({
+        status: 302,
+        headers: new Headers({
+          "Location": "https://" + req.headers.get("Host") + req.url,
+        }),
+      });
+    }
+  })();
+}
 
 console.log(`Listening on ${hostname}:${port}`);
 
@@ -87,8 +107,7 @@ for await (const de of Deno.readDir("pastes")) {
   }
 }
 
-const [thumbnails, interval] = (Deno.args[2] || "").split("=");
-if (thumbnails === "thumbnails") {
+if (nodeThumbnails) {
   const missing = perms
     ? missingPerms(
       (await (Deno as unknown as Permissions).permissions
@@ -108,7 +127,7 @@ if (thumbnails === "thumbnails") {
         "node",
         "pastes/thumbs/thumbnail_gen.js",
         String(port),
-        interval || "1000",
+        String(nodeThumbnailInterval),
       ]);
     } else {
       console.warn(
@@ -131,7 +150,7 @@ app.put("/", async (req) => {
   for await (const chunk of Deno.iter(req.body)) {
     let bytes = 0;
     try {
-      checkSpace(spaceLimit, usedSpace + total + chunk.length);
+      checkSpace(maxSize, usedSpace + total + chunk.length);
     } catch (err) {
       file.close();
       await Deno.remove(path);
