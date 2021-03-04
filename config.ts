@@ -27,5 +27,5 @@ export const config = {
 };
 
 if (configPath) {
-  await Deno.writeTextFile(configPath, stringify(config));
+  await Deno.writeTextFile(configPath, stringify(config)).catch(() => {});
 }
