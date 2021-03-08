@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const { join } = require("path");
 const { promises: fs } = require("fs");
 
-const [port, timeout] = process.argv.slice(2);
+const [port, timeout, url] = process.argv.slice(2);
 
 (async () => {
   if (
@@ -25,7 +25,15 @@ const [port, timeout] = process.argv.slice(2);
 
   const puppeteer = require("puppeteer");
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    ignoreHTTPSErrors: true,
+    acceptInsecureCerts: true,
+    args: [
+      "--ignore-certificate-errors",
+      "--ignore-certificate-errors-spki-list",
+      "--enable-features=NetworkService",
+    ],
+  });
 
   const page = await browser.newPage();
 
@@ -50,7 +58,7 @@ const [port, timeout] = process.argv.slice(2);
         continue;
       }
       console.log(`generating thumbnail: ${name}`);
-      await page.goto(`http://127.0.0.1:${port}/${name}.${language}`);
+      await page.goto(`${url}:${port}/${name}.${language}`);
 
       await page.screenshot({ type: "png", path: thumb });
     }

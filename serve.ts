@@ -128,6 +128,7 @@ if (nodeThumbnails) {
         "pastes/thumbs/thumbnail_gen.js",
         String(port),
         String(nodeThumbnailInterval),
+        `http${config.certFile && config.keyFile ? "s" : ""}://127.0.0.1`,
       ]);
     } else {
       console.warn(
@@ -208,6 +209,7 @@ app.get("/t/:id", async (req) => {
       headers: new Headers({ "Content-Type": "image/png" }),
       body: file,
     });
+    await req.done;
     return file.close();
   } catch (err) {
     console.error(err.message);
@@ -240,6 +242,7 @@ app.get("/:id", async (req) => {
       }),
       body: file,
     });
+    await req.done;
     return file.close();
   } catch {
     return req.respond({ status: 404 });
