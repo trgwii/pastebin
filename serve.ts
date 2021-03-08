@@ -166,6 +166,8 @@ app.get(
   (req) => req.respond({ ...defaultStaticOpts(req.url), body: js }),
 );
 
+app.static("/js/dts", staticFiles.dts);
+
 app.static("/vs", await editor);
 
 app.get("/r", async (req) => {

@@ -251,6 +251,16 @@
         "signature": "1",
         "affectsGlobalScope": true
       },
+      "https://deno.land/std@0.89.0/encoding/ascii85.ts": {
+        "version": "acd49f250fbaa191d8ffc83cedf7045b35be1b1d25c3b412b3aa706bdc2cb6bb",
+        "signature": "a1913d24a521f12176a847d8fa3fc538d011525a7f1fbafe4b67d0320effb850",
+        "affectsGlobalScope": false
+      },
+      "https://deno.land/std@0.89.0/encoding/binary.ts": {
+        "version": "26630f0739bcb82038a0d91b425dd35d6f8645b2f3df60556a4a7d9d31bd7a11",
+        "signature": "76cc035002d22741807552d960e531d54dffb76bc03f2e5f119e9a96cdb393e3",
+        "affectsGlobalScope": false
+      },
       "https://deno.land/std@0.89.0/bytes/mod.ts": {
         "version": "24e4947b74a83cbbf41ecd93a49f29c3f280fd920662a26fe309cce67a30cec3",
         "signature": "4247d12d8ab7443c7b7ed3b7df80978f0e4dfb552de63f170a02967c10a32c85",
@@ -264,16 +274,6 @@
       "https://deno.land/std@0.89.0/io/bufio.ts": {
         "version": "01dcf5d1e4944bfad291b24719dd0d7d2a74aaf84d7b9719aeb1d61976bd6575",
         "signature": "cab12661c0ead8145bfc4130349cd75dc34ddc233e514842d7429e4eb699e08d",
-        "affectsGlobalScope": false
-      },
-      "https://deno.land/std@0.89.0/encoding/ascii85.ts": {
-        "version": "acd49f250fbaa191d8ffc83cedf7045b35be1b1d25c3b412b3aa706bdc2cb6bb",
-        "signature": "a1913d24a521f12176a847d8fa3fc538d011525a7f1fbafe4b67d0320effb850",
-        "affectsGlobalScope": false
-      },
-      "https://deno.land/std@0.89.0/encoding/binary.ts": {
-        "version": "26630f0739bcb82038a0d91b425dd35d6f8645b2f3df60556a4a7d9d31bd7a11",
-        "signature": "76cc035002d22741807552d960e531d54dffb76bc03f2e5f119e9a96cdb393e3",
         "affectsGlobalScope": false
       },
       "https://deno.land/std@0.89.0/io/ioutil.ts": {
@@ -311,6 +311,11 @@
         "signature": "327fa3f09db9e46ae667ee676df1415ab6243a53c39764c5c1ca2e508da06756",
         "affectsGlobalScope": false
       },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/getBytes.ts": {
+        "version": "f85d4e332e79f5d87fe451fca8e34b718e82b61698ff4bd38696252915f4e835",
+        "signature": "b2c058dc8d5176716b6d9f8eddffa1c82aad4329f845df8034f9aeb08ece39a5",
+        "affectsGlobalScope": false
+      },
       "https://raw.githubusercontent.com/trgwii/bundler/master/types.ts": {
         "version": "075f277914f94dd260b153f3e23f25ae10d649dda1ed0fe656d4d8b6edde58d3",
         "signature": "c8231fb94998fd8e699846b5459995148236ce58de18024ec8aeefc9a4090cfe",
@@ -326,29 +331,34 @@
         "signature": "7ca48ffcc13da72cba6198a5c69b6c7268cd7909528835402d140edc2392a1cd",
         "affectsGlobalScope": false
       },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/compress.ts": {
-        "version": "5403cda2255a89641f6bfd51fa8ff75f9cb64eea56e3042dab950233fb2d9571",
-        "signature": "df00f469afaee2eacd75e91ec2998143966f1ce8726adf0b414b600c2a6e5981",
-        "affectsGlobalScope": false
-      },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/getBytes.ts": {
-        "version": "f85d4e332e79f5d87fe451fca8e34b718e82b61698ff4bd38696252915f4e835",
-        "signature": "b2c058dc8d5176716b6d9f8eddffa1c82aad4329f845df8034f9aeb08ece39a5",
-        "affectsGlobalScope": false
-      },
       "https://raw.githubusercontent.com/trgwii/bundler/master/extract.ts": {
         "version": "de26a3531c15436955cc9327f11053c2f3b8666b0bbd1a1f9da0e470a82368e0",
         "signature": "08fa22a85a1646ba877da5bab58bf9fb9c1b4f5465107a824c58e956e202e6e4",
         "affectsGlobalScope": false
       },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/load.ts": {
-        "version": "4959357d30ba9c1721da4d930489b371e37876fd15ad256165076dffc988ad1d",
-        "signature": "01cfdd1ca60e7b583f4dbdcfd200f86db7c6e0e15b1d0dc2f4688bd5ed3230b6",
+      "https://raw.githubusercontent.com/trgwii/bundler/master/ast.ts": {
+        "version": "9b9bedcb4e8ecbc958654ed15832f8e219b5a825b1eb0795b40df9475bd79a7e",
+        "signature": "46746a11416a01f3ce2ab55a6fedeac087f0b00c3da2e3de6f00f6882bb74e5a",
+        "affectsGlobalScope": false
+      },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/tsBundle.ts": {
+        "version": "2a7e244397f41dfd23ad43584ec90de0d1644b9f78867f7fa88484eadfd94107",
+        "signature": "220196888c57d653ac50e5a9c74b0bdc2d66c78daa83fb994e3c7481444e984d",
         "affectsGlobalScope": false
       },
       "https://raw.githubusercontent.com/trgwii/bundler/master/readerFromBuffer.ts": {
         "version": "2ef6e6b4e79d729b73043aa955084dfb8fa34525dc486c5c221f2459bc84aca0",
         "signature": "0d880fbc5dc1c406fa5e5018f809da88bea1435fea5866d5ca52e03593748a24",
+        "affectsGlobalScope": false
+      },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/compress.ts": {
+        "version": "5403cda2255a89641f6bfd51fa8ff75f9cb64eea56e3042dab950233fb2d9571",
+        "signature": "df00f469afaee2eacd75e91ec2998143966f1ce8726adf0b414b600c2a6e5981",
+        "affectsGlobalScope": false
+      },
+      "https://raw.githubusercontent.com/trgwii/bundler/master/load.ts": {
+        "version": "4959357d30ba9c1721da4d930489b371e37876fd15ad256165076dffc988ad1d",
+        "signature": "01cfdd1ca60e7b583f4dbdcfd200f86db7c6e0e15b1d0dc2f4688bd5ed3230b6",
         "affectsGlobalScope": false
       },
       "https://raw.githubusercontent.com/trgwii/bundler/master/parse.ts": {
@@ -371,16 +381,6 @@
         "signature": "c7e8327d76bd4ce9c1da353f5532fbefac1e9ab2dd08a74e6403e5b4ffaf42b8",
         "affectsGlobalScope": false
       },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/ast.ts": {
-        "version": "9b9bedcb4e8ecbc958654ed15832f8e219b5a825b1eb0795b40df9475bd79a7e",
-        "signature": "46746a11416a01f3ce2ab55a6fedeac087f0b00c3da2e3de6f00f6882bb74e5a",
-        "affectsGlobalScope": false
-      },
-      "https://raw.githubusercontent.com/trgwii/bundler/master/tsBundle.ts": {
-        "version": "bab5a4c25c7cbd8e2082624d20e7b5804e31fdccfc1007226652d69dd4127836",
-        "signature": "220196888c57d653ac50e5a9c74b0bdc2d66c78daa83fb994e3c7481444e984d",
-        "affectsGlobalScope": false
-      },
       "https://raw.githubusercontent.com/trgwii/bundler/master/unparse.ts": {
         "version": "bbd227ee587a834ffaf7ca47e1cceb9eaf80248900cdfa2f87b410f0c712a629",
         "signature": "01795ba883e9b3eced5637fcdcbe03162ffd10c6cdede61b4ce23d7aed1b355f",
@@ -392,7 +392,7 @@
         "affectsGlobalScope": false
       },
       "https://raw.githubusercontent.com/trgwii/bundler/master/bundler.ts": {
-        "version": "202ed088072e8480ca99f3011dffed4ddc064dba9f9a9e2d0eeadf85a4cc0699",
+        "version": "48760b914f3f05c4e9a8137f4cf58752f6ff9da62b06a8e26a1b7247d92b118d",
         "signature": "bc30a3b65a561e5fa611b79b8ee00d51f6540bf6f8ae86726df71613a7ea72cb",
         "affectsGlobalScope": false
       }
