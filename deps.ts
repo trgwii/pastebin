@@ -1,6 +1,10 @@
 export { encode } from "https://deno.land/std@0.89.0/encoding/base64url.ts";
+export {
+  parse,
+  stringify,
+} from "https://deno.land/std@0.89.0/encoding/toml.ts";
 export { createHash } from "https://deno.land/std@0.89.0/hash/mod.ts";
-export { serve } from "https://deno.land/std@0.89.0/http/server.ts";
+export { serve, serveTLS } from "https://deno.land/std@0.89.0/http/server.ts";
 export type {
   Response,
   Server,
