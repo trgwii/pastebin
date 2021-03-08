@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "date": "Mon, 08 Mar 2021 13:45:49 GMT",
+    "etag": "\"fb2db9c7c9e100d4e7d7f329a2e141a1\"",
+    "server-timing": "total;dur=104",
+    "content-type": "application/typescript; charset=utf-8",
+    "server": "Fly/7975a14 (2021-03-08)",
+    "last-modified": "Tue, 02 Mar 2021 19:10:30 GMT",
+    "access-control-max-age": "86400",
+    "x-deno-cache": "MISS",
+    "access-control-allow-origin": "*",
+    "via": "2 fly.io",
+    "cache-control": "public, max-age=31536000, immutable"
+  },
+  "url": "https://deno.land/std@0.89.0/io/streams.ts"
+}
