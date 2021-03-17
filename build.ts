@@ -2,7 +2,7 @@
 
 import { readerFromStreamReader } from "https://deno.land/std@0.89.0/io/streams.ts";
 
-import { exec } from "./exec.ts";
+import { exec, run } from "./exec.ts";
 
 const noop = () => {};
 
@@ -56,7 +56,16 @@ const assets = async () => {
 if (import.meta.main) {
   await reload(bundlerURL);
   await Deno.mkdir("assets/public/dts", { recursive: true }).catch(() => {});
-  await exec(["deno", "types", ">", "assets/public/dts/lib.deno.d.ts"]);
+  const types = run(["deno", "types"]);
+  const typesFile = await Deno.open("assets/public/dts/lib.deno.d.ts", {
+    create: true,
+    write: true,
+    truncate: true,
+  });
+  if (types.stdout) {
+    await Deno.copy(types.stdout, typesFile);
+  }
+  await types.status();
   const file = await Deno.open("assets/public/dts/lib.dom.d.ts", {
     create: true,
     write: true,

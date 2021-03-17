@@ -1,16 +1,17 @@
 {
   "headers": {
-    "date": "Mon, 08 Mar 2021 13:45:53 GMT",
-    "server-timing": "total;dur=1",
-    "server": "Fly/7975a14 (2021-03-08)",
     "access-control-max-age": "86400",
+    "fly-request-id": "01F111V2HJ3R1ZBR4G0XAYZ7RS",
+    "server-timing": "total;dur=0",
+    "etag": "\"2f4b78d714903ed31adbf934e39dba7d\"",
+    "cache-control": "public, max-age=31536000, immutable",
+    "date": "Wed, 17 Mar 2021 21:35:35 GMT",
     "via": "2 fly.io",
+    "server": "Fly/884dbc0 (2021-03-17)",
     "access-control-allow-origin": "*",
     "x-deno-cache": "HIT",
-    "cache-control": "public, max-age=31536000, immutable",
-    "etag": "\"2f4b78d714903ed31adbf934e39dba7d\"",
-    "last-modified": "Tue, 02 Mar 2021 19:10:30 GMT",
-    "content-type": "application/typescript; charset=utf-8"
+    "content-type": "application/typescript; charset=utf-8",
+    "last-modified": "Tue, 02 Mar 2021 19:10:30 GMT"
   },
   "url": "https://deno.land/std@0.89.0/fmt/colors.ts"
 }

@@ -52,8 +52,13 @@ try {
   void 0;
 }
 
-const { maxSize, port, hostname, nodeThumbnails, nodeThumbnailInterval } =
-  config;
+const {
+  maxSize,
+  port,
+  hostname,
+  nodeThumbnails,
+  nodeThumbnailInterval,
+} = config;
 let usedSpace = 0;
 
 for await (const ent of Deno.readDir("pastes")) {

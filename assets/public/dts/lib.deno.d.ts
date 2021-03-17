@@ -4005,7 +4005,7 @@ declare class GPUShaderModule implements GPUObjectBase {
 }
 
 declare interface GPUShaderModuleDescriptor extends GPUObjectDescriptorBase {
-  code: string;
+  code: string | Uint32Array;
   sourceMap?: any;
 }
 
@@ -5425,18 +5425,23 @@ declare class Window extends EventTarget {
   confirm: (message?: string) => boolean;
   prompt: (message?: string, defaultValue?: string) => string | null;
   Deno: typeof Deno;
+  Navigator: typeof Navigator;
   navigator: Navigator;
+  Location: typeof Location;
+  location: Location;
 }
 
 declare var window: Window & typeof globalThis;
 declare var self: Window & typeof globalThis;
 declare var onload: ((this: Window, ev: Event) => any) | null;
 declare var onunload: ((this: Window, ev: Event) => any) | null;
-declare var navigator: Navigator;
 
-declare interface Navigator {
+declare class Navigator {
+  constructor();
   readonly gpu: GPU;
 }
+
+declare var navigator: Navigator;
 
 /**
  * Shows the given message and waits for the enter key pressed.
