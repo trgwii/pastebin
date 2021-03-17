@@ -153,37 +153,43 @@ app.put("/", async (req) => {
   if (language) {
     hash.update(language + "\n");
   }
-  for await (const chunk of Deno.iter(req.body)) {
-    let bytes = 0;
-    try {
-      checkSpace(maxSize, usedSpace + total + chunk.length);
-    } catch (err) {
-      file.close();
+  try {
+    for await (const chunk of Deno.iter(req.body)) {
+      let bytes = 0;
+      try {
+        checkSpace(maxSize, usedSpace + total + chunk.length);
+      } catch (err) {
+        file.close();
+        await Deno.remove(path);
+        return req.respond({ status: 400, body: "File too large" });
+      }
+      while (bytes < chunk.length) {
+        const subchunk = chunk.subarray(bytes);
+        bytes += await file.write(subchunk);
+        hash.update(subchunk);
+      }
+      total += bytes;
+    }
+    usedSpace += total;
+    file.close();
+    const id = encode(new Uint8Array(hash.digest()));
+    const idPath = `pastes/${id}`;
+    const stats = await Deno.stat(idPath).catch(() => null);
+    if (stats) {
       await Deno.remove(path);
-      return req.respond({ status: 400, body: "File too large" });
+      usedSpace -= stats.size;
+      return req.respond({ status: 400, body: "File already exists: " + id });
     }
-    while (bytes < chunk.length) {
-      const subchunk = chunk.subarray(bytes);
-      bytes += await file.write(subchunk);
-      hash.update(subchunk);
-    }
-    total += bytes;
-  }
-  usedSpace += total;
-  file.close();
-  const id = encode(new Uint8Array(hash.digest()));
-  const idPath = `pastes/${id}`;
-  const stats = await Deno.stat(idPath).catch(() => null);
-  if (stats) {
+    await Deno.rename(path, idPath);
+    await Deno.writeTextFile(`pastes/meta/${id}`, JSON.stringify({ language }));
+    return req.respond({
+      body: id + " " + String(total),
+    });
+  } catch (err) {
+    file.close();
     await Deno.remove(path);
-    usedSpace -= stats.size;
-    return req.respond({ status: 400, body: "File already exists: " + id });
+    req.conn.close();
   }
-  await Deno.rename(path, idPath);
-  await Deno.writeTextFile(`pastes/meta/${id}`, JSON.stringify({ language }));
-  return req.respond({
-    body: id + " " + String(total),
-  });
 });
 
 app.get(
